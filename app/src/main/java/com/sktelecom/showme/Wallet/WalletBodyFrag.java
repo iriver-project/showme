@@ -1,6 +1,5 @@
 package com.sktelecom.showme.Wallet;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sktelecom.showme.R;
+import com.sktelecom.showme.Wallet.Left.WalletLeftCont;
+import com.sktelecom.showme.Wallet.Right.WalletRightCont;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.databinding.WalletBodyFragBinding;
 

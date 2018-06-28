@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.sktelecom.showme.Wallet.WalletCommonVM" />
+            type="com.sktelecom.showme.Wallet.CommonView.WalletCommonVM" />
 
     </data>
 
