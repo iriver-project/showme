@@ -1,28 +1,18 @@
 package com.sktelecom.showme.Wallet;
 
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.sktelecom.showme.Main.Model.PBean;
-import com.sktelecom.showme.Main.Model.VoContents;
+import com.sktelecom.showme.base.Model.PBean;
+import com.sktelecom.showme.base.Model.VoContents;
 import com.sktelecom.showme.Wallet.WalletCommonFrag.ICallbackEvent;
-import com.sktelecom.showme.base.Network.SmartNetWork;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.base.view.PViewModel;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.ratpoisonfactory.base.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WalletCommonVM extends PViewModel {

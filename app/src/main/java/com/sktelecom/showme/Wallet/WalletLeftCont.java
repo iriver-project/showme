@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.sktelecom.showme.Main.Model.VoContents;
+import com.sktelecom.showme.base.Model.VoContents;
 import com.sktelecom.showme.base.Network.SmartNetWork;
 import com.sktelecom.showme.base.view.PController;
 

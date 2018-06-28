@@ -10,9 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sktelecom.showme.BR
-import com.sktelecom.showme.Main.Model.EmptyVo
-import com.sktelecom.showme.Main.Model.PBean
-import com.sktelecom.showme.Main.Model.VoContents
+import com.sktelecom.showme.base.Model.EmptyVo
+import com.sktelecom.showme.base.Model.PBean
+import com.sktelecom.showme.base.Model.VoContents
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.databinding.CommonEmptyItemBinding

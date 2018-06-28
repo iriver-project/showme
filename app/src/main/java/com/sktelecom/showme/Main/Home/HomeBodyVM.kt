@@ -8,8 +8,8 @@ import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.android.volley.VolleyError
-import com.sktelecom.showme.Main.Model.PBean
-import com.sktelecom.showme.Main.Model.VoContents
+import com.sktelecom.showme.base.Model.PBean
+import com.sktelecom.showme.base.Model.VoContents
 import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.base.view.PViewModel

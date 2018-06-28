@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.sktelecom.showme.Main.Model.VoContents" />
+            type="com.sktelecom.showme.base.Model.VoContents" />
 
     </data>
 
