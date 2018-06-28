@@ -34,14 +34,14 @@ public class WalletCommonFrag extends PFragment {
     private WalletCommonFragBinding binded;
     private WalletCommonVM vm;
 
-    public static WalletCommonFrag with(String title, WalletCommonVM vm, ICallbackEvent mICallbackEvent) {
+    protected static WalletCommonFrag with(String title, WalletCommonVM vm, ICallbackEvent mICallbackEvent) {
         WalletCommonFrag frag = new WalletCommonFrag();
         frag.setCallback(title, vm, mICallbackEvent);
         return frag;
     }
 
 
-    public WalletCommonFrag withView() {
+    protected WalletCommonFrag withView() {
         return this;
     }
 
@@ -91,7 +91,7 @@ public class WalletCommonFrag extends PFragment {
 
     }
 
-    public interface ICallbackEvent {
+    protected interface ICallbackEvent {
         void onClick(VoContents vo);
 
         void getPage(int page);

@@ -61,8 +61,6 @@ public class WalletCommonVM extends PViewModel {
     }
 
 
-
-
     public void onClickOne(View v, VoContents vo) {
         Log.INSTANCE.i("DUER", "here Touch!!!", vo.getCONTENTS_ID());
     }
