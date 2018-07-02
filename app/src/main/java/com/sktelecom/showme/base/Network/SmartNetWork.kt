@@ -8,6 +8,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.sktelecom.showme.BackendApplication
 
 import org.json.JSONObject
 
@@ -27,7 +28,7 @@ class SmartNetWork {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
 
-        BackendVolley.instance?.addToRequestQueue(request)
+        BackendApplication.instance?.addToRequestQueue(request)
     }
 
 

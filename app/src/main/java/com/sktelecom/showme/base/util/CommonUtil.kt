@@ -1,4 +1,4 @@
-package org.ratpoisonfactory.base.util
+package com.sktelecom.showme.base.util
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

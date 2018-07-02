@@ -1,4 +1,4 @@
-package org.ratpoisonfactory.base.util
+package com.sktelecom.showme.base.util
 
 import android.content.Context
 import android.content.Intent

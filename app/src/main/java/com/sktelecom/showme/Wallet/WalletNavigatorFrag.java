@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.sktelecom.showme.R;
+import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.databinding.WalletNavigationFragBinding;
 
-import org.ratpoisonfactory.base.util.Log;
 
 
 public class WalletNavigatorFrag extends PFragment implements View.OnClickListener {

@@ -7,11 +7,11 @@ import android.view.View;
 import com.sktelecom.showme.base.Model.PBean;
 import com.sktelecom.showme.base.Model.VoContents;
 import com.sktelecom.showme.Wallet.CommonView.WalletCommonFrag.ICallbackEvent;
+import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.base.view.PViewModel;
 
 import org.jetbrains.annotations.NotNull;
-import org.ratpoisonfactory.base.util.Log;
 
 import java.util.List;
 

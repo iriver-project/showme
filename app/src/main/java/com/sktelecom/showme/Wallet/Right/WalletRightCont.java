@@ -13,12 +13,12 @@ import com.sktelecom.showme.Wallet.WalletBodyFrag;
 import com.sktelecom.showme.Wallet.CommonView.WalletCommonVM;
 import com.sktelecom.showme.base.Model.VoContents;
 import com.sktelecom.showme.base.Network.SmartNetWork;
+import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.ratpoisonfactory.base.util.Log;
 
 import java.util.ArrayList;
 import java.util.Objects;

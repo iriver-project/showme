@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import com.sktelecom.showme.R;
 import com.sktelecom.showme.Wallet.Left.WalletLeftCont;
 import com.sktelecom.showme.Wallet.Right.WalletRightCont;
+import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.databinding.WalletBodyFragBinding;
 
-import org.ratpoisonfactory.base.util.Log;
 
 public class WalletBodyFrag extends PFragment {
     private ICallback mICallback;
