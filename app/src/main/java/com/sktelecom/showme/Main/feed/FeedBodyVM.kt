@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.Home
+package com.sktelecom.showme.Main.feed
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
@@ -18,20 +18,20 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
-class HomeBodyVM : PViewModel() {
-    internal val TAG = HomeBodyVM::class.java.simpleName
+class FeedBodyVM : PViewModel() {
+    internal val TAG = FeedBodyVM::class.java.simpleName
     internal lateinit var fruitList: MutableLiveData<List<PBean>>
 
 
     override fun asFragCreate(): PFragment {
-        frag = HomeBodyFrag.with("title~", this, mICallBack);
+        frag = FeedBodyFrag.with("title~", this, mICallBack);
         return frag
     }
 
 
     fun asFragResume(): PFragment {
         if (frag == null)
-            frag = HomeBodyFrag.with("title~", this, mICallBack);
+            frag = FeedBodyFrag.with("title~", this, mICallBack);
         return frag
     }
 
@@ -68,7 +68,7 @@ class HomeBodyVM : PViewModel() {
 
                         for (i in 0..(array.length() - 1)) {
                             row = array.optJSONObject(i)
-                            fruitsStringList.add(VoContents(row.optString("CONTENTS_ID"), "type", "desc", row.optString("TITLE")))
+                            fruitsStringList.add(VoContents(row.optString("TITLE"), "type", "desc", row.optString("CONTENTS_ID")))
                         }
                         msg.what = 0
                         msg.obj = fruitsStringList;
@@ -116,7 +116,7 @@ class HomeBodyVM : PViewModel() {
 //        Log.d(TAG, "on cleared called")
 //    }
 
-    internal val mICallBack = object : HomeBodyFrag.ICallbackEvent {
+    internal val mICallBack = object : FeedBodyFrag.ICallbackEvent {
         override fun getPage(page: Int) {
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }

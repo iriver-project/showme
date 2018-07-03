@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.Home
+package com.sktelecom.showme.Main.feed
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
@@ -15,13 +15,10 @@ import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoContents
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.view.PFragment
-import com.sktelecom.showme.databinding.CommonEmptyItemBinding
-import com.sktelecom.showme.databinding.CommonLoadingItemBinding
-import com.sktelecom.showme.databinding.ContentItemBinding
-import com.sktelecom.showme.databinding.HomeBodyFragBinding
+import com.sktelecom.showme.databinding.*
 import java.util.*
 
-class HomeBodyFrag : PFragment() {
+class FeedBodyFrag : PFragment() {
 
     internal lateinit var mICallbackEvent: ICallbackEvent
     internal lateinit var mListAdapter: CommonListAdapter
@@ -29,19 +26,19 @@ class HomeBodyFrag : PFragment() {
     internal var list: ArrayList<PBean> = ArrayList()
     internal var page = 0
 
-    internal lateinit var vm: HomeBodyVM
+    internal lateinit var vm: FeedBodyVM
     internal lateinit var title: String
-    internal lateinit var binding: HomeBodyFragBinding
+    internal lateinit var binding: FeedBodyFragBinding
 
 
-    fun setCallback(title: String, vm: HomeBodyVM, mICallbackEvent: ICallbackEvent) {
+    fun setCallback(title: String, vm: FeedBodyVM, mICallbackEvent: ICallbackEvent) {
         this.mICallbackEvent = mICallbackEvent
         this.title = title
         this.vm = vm;
     }
 
     override fun abCreateView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.home_body_frag, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.feed_body_frag, container, false)
 //        binding.viewmodel = FeedBodyVM()
         binding.viewmodel = vm
         binding.viewmodel!!.getList().observe(this, Observer {
@@ -122,7 +119,7 @@ class HomeBodyFrag : PFragment() {
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             if (viewType == PBean.TYPE_CONTENTS) {
-                val binding = ContentItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+                val binding = FeedItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
                 return ContentsViewHolder(binding)
             } else if (viewType == PBean.TYPE_EMPTY) {
                 val binding = CommonEmptyItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -181,7 +178,7 @@ class HomeBodyFrag : PFragment() {
         }
 
 
-        internal inner class ContentsViewHolder internal constructor(val ibinding: ContentItemBinding) : RecyclerView.ViewHolder(ibinding.getRoot()) {
+        internal inner class ContentsViewHolder internal constructor(val ibinding: FeedItemBinding) : RecyclerView.ViewHolder(ibinding.getRoot()) {
 
             internal fun bind(model: VoContents) {
                 ibinding.setVariable(BR.item, model)
@@ -196,8 +193,8 @@ class HomeBodyFrag : PFragment() {
 
     companion object {
 
-        fun with(title: String, vm: HomeBodyVM, mICallbackEvent: ICallbackEvent): HomeBodyFrag {
-            val frag = HomeBodyFrag()
+        fun with(title: String, vm: FeedBodyVM, mICallbackEvent: ICallbackEvent): FeedBodyFrag {
+            val frag = FeedBodyFrag()
             frag.setCallback(title, vm, mICallbackEvent)
             return frag
         }

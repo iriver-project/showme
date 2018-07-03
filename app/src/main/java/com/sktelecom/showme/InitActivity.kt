@@ -2,6 +2,7 @@ package com.sktelecom.showme
 
 import android.content.Intent
 import android.os.Bundle
+import com.sktelecom.showme.Main.MainActivity
 import com.sktelecom.showme.Wallet.WalletActivity
 import com.sktelecom.showme.base.room.DBManager
 import com.sktelecom.showme.base.util.CommonUtil
@@ -24,7 +25,7 @@ class InitActivity : PActivity() {
 //    }
 
     private fun startNextActivity() {
-        val intent = Intent(pCon, WalletActivity::class.java)
+        val intent = Intent(pCon, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
         startActivity(intent)
         finish()
