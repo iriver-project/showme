@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.sktelecom.showme.Main.Home.HomeBodyVM" />
+            type="com.sktelecom.showme.Main.home.HomeBodyVM" />
 
         <variable
             name="item"

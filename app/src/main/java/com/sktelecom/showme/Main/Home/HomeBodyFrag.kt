@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.Home
+package com.sktelecom.showme.Main.home
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil

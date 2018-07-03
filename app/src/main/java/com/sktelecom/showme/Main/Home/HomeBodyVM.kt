@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.Home
+package com.sktelecom.showme.Main.home
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
