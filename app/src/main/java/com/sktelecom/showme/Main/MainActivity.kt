@@ -9,6 +9,9 @@ import com.sktelecom.showme.base.view.PActivity
 import com.sktelecom.showme.databinding.ActivityMainBinding
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
+import android.support.design.widget.CoordinatorLayout
+
+
 
 
 class MainActivity : PActivity() {
@@ -43,6 +46,9 @@ class MainActivity : PActivity() {
             }
         })
         prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(0);
+
+        val layoutParams = binding.bottomNavigation.getLayoutParams() as CoordinatorLayout.LayoutParams
+        layoutParams.behavior = BottomNavigationViewBehavior()
 
 //        val bodyvm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
         mainBody = MainBodyCont(this, object : MainBodyCont.ICallbackToAct {

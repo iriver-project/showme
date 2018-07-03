@@ -69,6 +69,7 @@ class MyBodyVM : PViewModel() {
                         for (i in 0..(array.length() - 1)) {
                             row = array.optJSONObject(i)
                             fruitsStringList.add(VoContents(row.optString("TITLE"), "type", "desc", row.optString("CONTENTS_ID")))
+                            fruitsStringList.add(VoContents(row.optString("TITLE"), "type", "desc", row.optString("CONTENTS_ID")))
                         }
                         msg.what = 0
                         msg.obj = fruitsStringList;
