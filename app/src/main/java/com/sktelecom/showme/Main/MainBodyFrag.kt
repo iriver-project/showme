@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.feed.FeedBodyVM
+import com.sktelecom.showme.Main.notification.NotificationBodyVM
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PFragment
@@ -20,6 +21,7 @@ class MainBodyFrag : PFragment() {
     internal lateinit var mICallback: ICallback
     internal lateinit var homeVm: HomeBodyVM
     internal lateinit var feedVm: FeedBodyVM
+    internal lateinit var notiVm: NotificationBodyVM
     internal lateinit var binded: MainBodyFragBinding
 
     fun withView(): MainBodyFrag {
@@ -38,6 +40,7 @@ class MainBodyFrag : PFragment() {
         //
         homeVm = ViewModelProviders.of(this.activity!!).get(HomeBodyVM::class.java)
         feedVm = ViewModelProviders.of(this.activity!!).get(FeedBodyVM::class.java)
+        notiVm = ViewModelProviders.of(this.activity!!).get(NotificationBodyVM::class.java)
         //        rightCont = new WalletRightCont(getActivity(), this, null);
 
 
@@ -63,10 +66,7 @@ class MainBodyFrag : PFragment() {
 
         homeVm.asFragCreate()
         feedVm.asFragCreate()
-        //        leftCont.asViewModelCreate();
-        //        rightCont.asViewModelCreate();
-        //        rightVm.asFragCreate();
-
+        notiVm.asFragCreate()
 
         return binded.root
     }
@@ -97,12 +97,13 @@ class MainBodyFrag : PFragment() {
             when (num) {
                 0 -> return homeVm.asFragResume()
                 1 -> return feedVm.asFragResume()
+                2 -> return notiVm.asFragResume()
                 else -> return null
             }
         }
 
         override fun getCount(): Int {
-            return 2
+            return 3
         }
     }
 
