@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.feed
+package com.sktelecom.showme.Main.my
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
@@ -18,26 +18,21 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
-class FeedBodyVM : PViewModel() {
-    internal val TAG = FeedBodyVM::class.java.simpleName
+class MyBodyVM : PViewModel() {
+    internal val TAG = MyBodyVM::class.java.simpleName
     internal lateinit var fruitList: MutableLiveData<List<PBean>>
 
 
     override fun asFragCreate(): PFragment {
-        frag = FeedBodyFrag.with("title~", this, mICallBack);
+        frag = MyBodyFrag.with("title~", this, mICallBack);
         return frag
     }
 
 
     fun asFragResume(): PFragment {
         if (frag == null)
-            frag = FeedBodyFrag.with("title~", this, mICallBack);
+            frag = MyBodyFrag.with("title~", this, mICallBack);
         return frag
-    }
-
-
-    fun getInitList() {
-        (frag as FeedBodyFrag).getInitList()
     }
 
     fun getList(): LiveData<List<PBean>> {
@@ -121,7 +116,7 @@ class FeedBodyVM : PViewModel() {
 //        Log.d(TAG, "on cleared called")
 //    }
 
-    internal val mICallBack = object : FeedBodyFrag.ICallbackEvent {
+    internal val mICallBack = object : MyBodyFrag.ICallbackEvent {
         override fun getPage(page: Int) {
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }

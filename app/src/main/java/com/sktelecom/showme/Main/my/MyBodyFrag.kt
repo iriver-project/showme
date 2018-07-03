@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.feed
+package com.sktelecom.showme.Main.my
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
@@ -18,7 +18,7 @@ import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.databinding.*
 import java.util.*
 
-class FeedBodyFrag : PFragment() {
+class MyBodyFrag : PFragment() {
 
     internal lateinit var mICallbackEvent: ICallbackEvent
     internal lateinit var mListAdapter: CommonListAdapter
@@ -26,22 +26,25 @@ class FeedBodyFrag : PFragment() {
     internal var list: ArrayList<PBean> = ArrayList()
     internal var page = 0
 
-    internal lateinit var vm: FeedBodyVM
+    internal lateinit var vm: MyBodyVM
     internal lateinit var title: String
-    internal lateinit var binding: FeedBodyFragBinding
+    internal lateinit var binding: MyBodyFragBinding
 
 
-    fun setCallback(title: String, vm: FeedBodyVM, mICallbackEvent: ICallbackEvent) {
+    fun setCallback(title: String, vm: MyBodyVM, mICallbackEvent: ICallbackEvent) {
         this.mICallbackEvent = mICallbackEvent
         this.title = title
         this.vm = vm;
     }
 
     override fun abCreateView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.feed_body_frag, container, false)
-//        binding.viewmodel = FeedBodyVM()
+        binding = DataBindingUtil.inflate(inflater, R.layout.my_body_frag, container, false)
+//        binding.viewmodel = MyBodyVM()
         binding.viewmodel = vm
-
+        binding.viewmodel!!.getList().observe(this, Observer {
+            list = it as ArrayList<PBean>
+            binding.rv.setAdapter(mListAdapter)
+        });
         mLinearLayoutManager = LinearLayoutManager(pCon)
         mLinearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mLinearLayoutManager.scrollToPosition(0)
@@ -67,13 +70,6 @@ class FeedBodyFrag : PFragment() {
         return binding.getRoot()
     }
 
-
-    fun getInitList(){
-        binding.viewmodel!!.getList().observe(this, Observer {
-            list = it as ArrayList<PBean>
-            binding.rv.setAdapter(mListAdapter)
-        });
-    }
     override fun onCreated() {
 
     }
@@ -123,7 +119,7 @@ class FeedBodyFrag : PFragment() {
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             if (viewType == PBean.TYPE_CONTENTS) {
-                val binding = FeedItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+                val binding = MyItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
                 return ContentsViewHolder(binding)
             } else if (viewType == PBean.TYPE_EMPTY) {
                 val binding = CommonEmptyItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -182,7 +178,7 @@ class FeedBodyFrag : PFragment() {
         }
 
 
-        internal inner class ContentsViewHolder internal constructor(val ibinding: FeedItemBinding) : RecyclerView.ViewHolder(ibinding.getRoot()) {
+        internal inner class ContentsViewHolder internal constructor(val ibinding: MyItemBinding) : RecyclerView.ViewHolder(ibinding.getRoot()) {
 
             internal fun bind(model: VoContents) {
                 ibinding.setVariable(BR.item, model)
@@ -197,8 +193,8 @@ class FeedBodyFrag : PFragment() {
 
     companion object {
 
-        fun with(title: String, vm: FeedBodyVM, mICallbackEvent: ICallbackEvent): FeedBodyFrag {
-            val frag = FeedBodyFrag()
+        fun with(title: String, vm: MyBodyVM, mICallbackEvent: ICallbackEvent): MyBodyFrag {
+            val frag = MyBodyFrag()
             frag.setCallback(title, vm, mICallbackEvent)
             return frag
         }

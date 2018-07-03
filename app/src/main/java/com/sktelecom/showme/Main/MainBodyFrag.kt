@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.feed.FeedBodyVM
+import com.sktelecom.showme.Main.my.MyBodyVM
 import com.sktelecom.showme.Main.notification.NotificationBodyVM
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.util.Log
@@ -22,6 +23,8 @@ class MainBodyFrag : PFragment() {
     internal lateinit var homeVm: HomeBodyVM
     internal lateinit var feedVm: FeedBodyVM
     internal lateinit var notiVm: NotificationBodyVM
+    internal lateinit var myVm: MyBodyVM
+
     internal lateinit var binded: MainBodyFragBinding
 
     fun withView(): MainBodyFrag {
@@ -41,7 +44,7 @@ class MainBodyFrag : PFragment() {
         homeVm = ViewModelProviders.of(this.activity!!).get(HomeBodyVM::class.java)
         feedVm = ViewModelProviders.of(this.activity!!).get(FeedBodyVM::class.java)
         notiVm = ViewModelProviders.of(this.activity!!).get(NotificationBodyVM::class.java)
-        //        rightCont = new WalletRightCont(getActivity(), this, null);
+        myVm = ViewModelProviders.of(this.activity!!).get(MyBodyVM::class.java)
 
 
         val viewadapter = ViewIconPagerAdapter(fragmentManager!!)
@@ -56,6 +59,9 @@ class MainBodyFrag : PFragment() {
             override fun onPageSelected(position: Int) {
                 Log.i("DUER", position)
                 mICallback.selected(position)
+                if (position == 1) {
+                    feedVm.getInitList()
+                }
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -67,6 +73,7 @@ class MainBodyFrag : PFragment() {
         homeVm.asFragCreate()
         feedVm.asFragCreate()
         notiVm.asFragCreate()
+        myVm.asFragCreate()
 
         return binded.root
     }
@@ -98,12 +105,13 @@ class MainBodyFrag : PFragment() {
                 0 -> return homeVm.asFragResume()
                 1 -> return feedVm.asFragResume()
                 2 -> return notiVm.asFragResume()
+                3 -> return myVm.asFragResume()
                 else -> return null
             }
         }
 
         override fun getCount(): Int {
-            return 3
+            return 4
         }
     }
 
