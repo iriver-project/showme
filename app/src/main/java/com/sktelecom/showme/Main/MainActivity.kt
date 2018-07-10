@@ -45,6 +45,7 @@ class MainActivity : PActivity() {
                 return true
             }
         })
+
         prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(0);
 
         val layoutParams = binding.bottomNavigation.getLayoutParams() as CoordinatorLayout.LayoutParams
