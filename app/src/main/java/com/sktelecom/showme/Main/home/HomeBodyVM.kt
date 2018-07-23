@@ -30,8 +30,8 @@ class HomeBodyVM : PViewModel() {
 
 
     fun asFragResume(): PFragment {
-        if (frag == null)
-            frag = HomeBodyFrag.with("title~", this, mICallBack);
+//        if (frag == null)
+//            frag = HomeBodyFrag.with("title~", this, mICallBack);
         return frag
     }
 

@@ -24,10 +24,11 @@
 
         <activity
             android:name=".Main.MainActivity"
+            android:clearTaskOnLaunch="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        
+
         <activity
             android:name=".Wallet.WalletActivity"
             android:launchMode="singleTask"

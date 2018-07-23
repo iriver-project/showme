@@ -1,5 +1,6 @@
 package com.sktelecom.showme.Main
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.sktelecom.showme.R
@@ -10,15 +11,22 @@ import com.sktelecom.showme.databinding.ActivityMainBinding
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
 import android.support.design.widget.CoordinatorLayout
-
-
+import com.sktelecom.showme.Main.feed.FeedBodyVM
+import com.sktelecom.showme.Main.home.HomeBodyVM
+import com.sktelecom.showme.Main.my.MyBodyVM
+import com.sktelecom.showme.Main.notification.NotificationBodyVM
 
 
 class MainActivity : PActivity() {
 
     internal lateinit var binding: ActivityMainBinding
     internal lateinit var prevBottomNavigation: MenuItem
-    internal lateinit var mainBody: MainBodyCont
+//    internal lateinit var mainBody: MainBodyCont
+
+    internal lateinit var homeVm: HomeBodyVM
+    internal lateinit var feedVm: FeedBodyVM
+    internal lateinit var notiVm: NotificationBodyVM
+    internal lateinit var myVm: MyBodyVM
 
     override fun onAfaterCreate(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -30,38 +38,53 @@ class MainActivity : PActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.getItemId()) {
                     R.id.action_home -> {
-                        mainBody.selected(0)
+                        pFragReplace(binding.frameBody.id, homeVm.frag)
+                    }
+                    R.id.action_tv -> {
+                        pFragReplace(binding.frameBody.id, homeVm.frag)
                     }
                     R.id.action_feed -> {
-                        mainBody.selected(1)
+                        pFragReplace(binding.frameBody.id, feedVm.frag)
                     }
                     R.id.action_notice -> {
-                        mainBody.selected(2)
+                        pFragReplace(binding.frameBody.id, notiVm.frag)
                     }
                     R.id.action_my -> {
-                        mainBody.selected(3)
+                        pFragReplace(binding.frameBody.id, myVm.frag)
                     }
                 }
                 return true
             }
         })
-        prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(0);
-
-        val layoutParams = binding.bottomNavigation.getLayoutParams() as CoordinatorLayout.LayoutParams
-        layoutParams.behavior = BottomNavigationViewBehavior()
+        prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(1);
+        selectedPage(1)
+//        val layoutParams = binding.bottomNavigation.getLayoutParams() as CoordinatorLayout.LayoutParams
+//        layoutParams.behavior = BottomNavigationViewBehavior()
 
 //        val bodyvm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
-        mainBody = MainBodyCont(this, object : MainBodyCont.ICallbackToAct {
-            override fun selected(position: Int) {
-                selectedPage(position)
-            }
+//        mainBody = MainBodyCont(this, object : MainBodyCont.ICallbackToAct {
+//            override fun selected(position: Int) {
+//                selectedPage(position)
+//            }
+//
+//            override fun scrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+//
+//            }
+//
+//        })
+//        pFragAdd(binding.frameBody.id, mainBody.asFragCreate())
 
-            override fun scrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        homeVm = ViewModelProviders.of(this).get(HomeBodyVM::class.java)
+        feedVm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
+        notiVm = ViewModelProviders.of(this).get(NotificationBodyVM::class.java)
+        myVm = ViewModelProviders.of(this).get(MyBodyVM::class.java)
 
-            }
+        homeVm.asFragCreate()
+        feedVm.asFragCreate()
+        notiVm.asFragCreate()
+        myVm.asFragCreate()
 
-        })
-        pFragAdd(binding.frameBody.id, mainBody.asFragCreate())
+        pFragAdd(binding.frameBody.id, feedVm.asFragResume())
     }
 
 

@@ -40,14 +40,19 @@ class HomeBodyFrag : PFragment() {
         this.vm = vm;
     }
 
+
     override fun abCreateView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_body_frag, container, false)
 //        binding.viewmodel = FeedBodyVM()
         binding.viewmodel = vm
-        binding.viewmodel!!.getList().observe(this, Observer {
-            list = it as ArrayList<PBean>
+        if (list.size <= 0) {
+            binding.viewmodel!!.getList().observe(this, Observer {
+                list = it as ArrayList<PBean>
+                binding.rv.setAdapter(mListAdapter)
+            })
+        }else{
             binding.rv.setAdapter(mListAdapter)
-        });
+        }
         mLinearLayoutManager = LinearLayoutManager(pCon)
         mLinearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mLinearLayoutManager.scrollToPosition(0)
