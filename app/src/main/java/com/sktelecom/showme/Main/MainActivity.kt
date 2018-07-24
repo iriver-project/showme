@@ -10,7 +10,6 @@ import com.sktelecom.showme.base.view.PActivity
 import com.sktelecom.showme.databinding.ActivityMainBinding
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
-import android.support.design.widget.CoordinatorLayout
 import com.sktelecom.showme.Main.feed.FeedBodyVM
 import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.my.MyBodyVM

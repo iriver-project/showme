@@ -21,10 +21,18 @@ abstract class PActivity : FragmentActivity() {
     abstract fun onAfaterCreate(savedInstanceState: Bundle?)
 
 
-    fun pFragAdd(resId: Int, frag: Fragment?) {
+    fun pFragAdd(resId: Int, frag: Fragment) {
         if (frag != null) {
             val fragTrans = mFragMan.beginTransaction()
             fragTrans.add(resId, frag, "")
+            fragTrans.commit()
+        }
+    }
+
+    fun pFragReplace(resId: Int, frag: Fragment) {
+        if (frag != null) {
+            val fragTrans = mFragMan.beginTransaction()
+            fragTrans.replace(resId, frag, "")
             fragTrans.commit()
         }
     }

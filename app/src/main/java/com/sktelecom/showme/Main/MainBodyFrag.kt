@@ -8,8 +8,8 @@ import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.feed.FeedBodyVM
+import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.my.MyBodyVM
 import com.sktelecom.showme.Main.notification.NotificationBodyVM
 import com.sktelecom.showme.R
