@@ -76,7 +76,6 @@ class MainActivity : PActivity() {
 
         homeVm = ViewModelProviders.of(this).get(HomeBodyVM::class.java)
         tvVm = ViewModelProviders.of(this).get(TvBodyVM::class.java)
-
         feedVm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
         notiVm = ViewModelProviders.of(this).get(NotificationBodyVM::class.java)
         myVm = ViewModelProviders.of(this).get(MyBodyVM::class.java)

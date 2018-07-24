@@ -15,6 +15,7 @@ import com.sktelecom.showme.R;
 import com.sktelecom.showme.base.Model.EmptyVo;
 import com.sktelecom.showme.base.Model.PBean;
 import com.sktelecom.showme.base.Model.VoContents;
+import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.databinding.CommonEmptyItemBinding;
 import com.sktelecom.showme.databinding.CommonLoadingItemBinding;
@@ -56,6 +57,16 @@ public class TvCommonFrag extends PFragment {
         binded = DataBindingUtil.inflate(inflater, R.layout.tv_common_frag, container, false);
         binded.setViewmodel(vm);
 
+        Log.INSTANCE.i("abCreateView");
+
+
+        return binded.getRoot();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
         binded.getViewmodel().getList().observe(this, pBeans -> {
             list = pBeans;
 
@@ -66,10 +77,7 @@ public class TvCommonFrag extends PFragment {
         mLinearLayoutManager.scrollToPosition(0);
 
         binded.tvTitle.setText(title);
-
-        return binded.getRoot();
     }
-
 
     @Override
     public void onCreated() {

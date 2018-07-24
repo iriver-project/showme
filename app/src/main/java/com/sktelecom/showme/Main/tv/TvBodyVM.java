@@ -51,9 +51,9 @@ public class TvBodyVM extends PViewModel {
     }
 
     public PFragment asFragResume() {
-        if (frag == null) {
-            this.asFragCreate();
-        }
+//        if (frag == null) {
+//            this.asFragCreate();
+//        }
         return frag;
     }
 

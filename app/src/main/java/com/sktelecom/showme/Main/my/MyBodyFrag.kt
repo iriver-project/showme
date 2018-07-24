@@ -39,7 +39,12 @@ class MyBodyFrag : PFragment() {
 
     override fun abCreateView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.my_body_frag, container, false)
-//        binding.viewmodel = MyBodyVM()
+
+        return binding.getRoot()
+    }
+
+    override fun onCreated() {
+        //        binding.viewmodel = MyBodyVM()
         binding.viewmodel = vm
         binding.viewmodel!!.getList().observe(this, Observer {
             list = it as ArrayList<PBean>
@@ -67,10 +72,6 @@ class MyBodyFrag : PFragment() {
         mListAdapter = CommonListAdapter()
 
         mListAdapter.addDataToBottom(EmptyVo())
-        return binding.getRoot()
-    }
-
-    override fun onCreated() {
 
     }
 

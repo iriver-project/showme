@@ -2,8 +2,10 @@ package com.sktelecom.showme.Main.tv;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,6 @@ import com.sktelecom.showme.R;
 import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.databinding.TvBodyFragBinding;
-import com.sktelecom.showme.databinding.WalletBodyFragBinding;
-
 
 public class TvBodyFrag extends PFragment {
     private ICallback mICallback;
@@ -44,10 +44,51 @@ public class TvBodyFrag extends PFragment {
         Log.INSTANCE.i("DUER", "abCreateView  !!!!!!!!");
         binded = DataBindingUtil.inflate(inflater, R.layout.tv_body_frag, container, false);
 
-        left = ViewModelProviders.of(this).get("RIGHT", TvCommonVM.class);
-        right = ViewModelProviders.of(this).get("LEFT", TvCommonVM.class);
+
+        return binded.getRoot();
+    }
 
 
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+
+//    }
+
+    @Override
+    public void onDestroyView() {
+        if (binded != null) {
+            ViewGroup parentViewGroup = (ViewGroup) binded.getRoot().getParent();
+
+            if (null != parentViewGroup) {
+                parentViewGroup.removeView(binded.getRoot());
+            }
+        }
+        FragmentManager mFragmentMgr = getFragmentManager();
+        FragmentTransaction mTransaction = mFragmentMgr.beginTransaction();
+        mTransaction.remove(left.frag);
+        mTransaction.remove(right.frag);
+        mTransaction.commit();
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public void onCreated() {
+        if (left == null) {
+            left = ViewModelProviders.of(this).get("LEFT", TvCommonVM.class);
+            right = ViewModelProviders.of(this).get("RIGHT", TvCommonVM.class);
+
+            Log.INSTANCE.i("DUER", "onCreated");
+
+            left.asFragCreate();
+            right.asFragCreate();
+        }
         ViewIconPagerAdapter viewadapter = new ViewIconPagerAdapter(getFragmentManager());
         binded.pager.setAdapter(viewadapter);
         binded.pager.setOffscreenPageLimit(1);
@@ -72,35 +113,15 @@ public class TvBodyFrag extends PFragment {
             }
         });
 
-
-        left.asFragCreate();
-        right.asFragCreate();
-
         if (mICallback != null)
             mICallback.init();
 
-        return binded.getRoot();
     }
-
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (binded != null) {
-            ViewGroup parentViewGroup = (ViewGroup) binded.getRoot().getParent();
-
-            if (null != parentViewGroup) {
-                parentViewGroup.removeView(binded.getRoot());
-            }
-        }
+    public void onResume() {
+        super.onResume();
     }
-
-
-    @Override
-    public void onCreated() {
-
-    }
-
 
     private class ViewIconPagerAdapter extends FragmentPagerAdapter {
 
