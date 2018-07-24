@@ -14,6 +14,7 @@ import com.sktelecom.showme.Main.feed.FeedBodyVM
 import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.my.MyBodyVM
 import com.sktelecom.showme.Main.notification.NotificationBodyVM
+import com.sktelecom.showme.Main.tv.TvBodyVM
 
 
 class MainActivity : PActivity() {
@@ -23,6 +24,7 @@ class MainActivity : PActivity() {
 //    internal lateinit var mainBody: MainBodyCont
 
     internal lateinit var homeVm: HomeBodyVM
+    internal lateinit var tvVm: TvBodyVM
     internal lateinit var feedVm: FeedBodyVM
     internal lateinit var notiVm: NotificationBodyVM
     internal lateinit var myVm: MyBodyVM
@@ -32,7 +34,6 @@ class MainActivity : PActivity() {
         Log.i(CommonUtil.with.now())
         binding.executePendingBindings()
 
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.getItemId()) {
@@ -40,7 +41,7 @@ class MainActivity : PActivity() {
                         pFragReplace(binding.frameBody.id, homeVm.frag)
                     }
                     R.id.action_tv -> {
-                        pFragReplace(binding.frameBody.id, homeVm.frag)
+                        pFragReplace(binding.frameBody.id, tvVm.frag)
                     }
                     R.id.action_feed -> {
                         pFragReplace(binding.frameBody.id, feedVm.frag)
@@ -74,16 +75,20 @@ class MainActivity : PActivity() {
 //        pFragAdd(binding.frameBody.id, mainBody.asFragCreate())
 
         homeVm = ViewModelProviders.of(this).get(HomeBodyVM::class.java)
+        tvVm = ViewModelProviders.of(this).get(TvBodyVM::class.java)
+
         feedVm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
         notiVm = ViewModelProviders.of(this).get(NotificationBodyVM::class.java)
         myVm = ViewModelProviders.of(this).get(MyBodyVM::class.java)
 
+
         homeVm.asFragCreate()
+        tvVm.asFragCreate()
         feedVm.asFragCreate()
         notiVm.asFragCreate()
         myVm.asFragCreate()
 
-        pFragAdd(binding.frameBody.id, feedVm.asFragResume())
+        pFragAdd(binding.frameBody.id, tvVm.asFragResume())
     }
 
 

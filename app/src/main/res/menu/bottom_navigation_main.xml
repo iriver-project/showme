@@ -12,7 +12,7 @@
         android:id="@+id/action_tv"
         android:enabled="true"
         android:icon="@drawable/ic_supervisor_account_black_24dp"
-        android:title="feed"
+        android:title="tv"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_feed"
