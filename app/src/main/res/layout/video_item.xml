@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.sktelecom.showme.Main.my.MyBodyVM" />
+
+        <variable
+            name="item"
+            type="com.sktelecom.showme.base.Model.VoVideo" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/ivPDF"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:background="#ffffff"
+        android:onClick="@{(v) -> viewmodel.onClickVideo(item)}"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        card_view:cardCornerRadius="7dp">
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvHeart"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text="@{item.heart}" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/tvHeart"
+                android:src="@android:drawable/btn_star_big_off" />
+
+
+            <ImageView
+                android:id="@+id/ivArtist"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp" />
+
+
+            <TextView
+                android:id="@+id/tvArtistName"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/ivArtist"
+                android:gravity="center_vertical"
+                android:text="@{item.artistName}" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_above="@id/ivArtist"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@{item.title}"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.sktelecom.showme.Main.my.MyBodyVM" />
+
+        <variable
+            name="item"
+            type="com.sktelecom.showme.base.Model.VoUserInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:animateLayoutChanges="true"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/rlMyImg"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_white_round"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:stateListAnimator="@anim/elevation_lower">
+
+            <ImageView
+                android:id="@+id/ivMyImg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlNickName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlMyImg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tvNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_centerHorizontal="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@{item.nickName}"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlNickName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/rlLev"
+                android:layout_width="70dp"
+                android:onClick="@{(v) -> viewmodel.onClickMyLev(item)}"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvLevCnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{item.level}"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvLevCnt"
+                    android:gravity="center"
+                    android:text="레벨"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlFollower"
+                android:onClick="@{(v) -> viewmodel.onClickMyFollower(item)}"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rlLev">
+
+                <TextView
+                    android:id="@+id/tvFollowerCnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{item.follower}"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvFollowerCnt"
+                    android:gravity="center"
+                    android:text="팔로워"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlFollowing"
+                android:layout_width="70dp"
+                android:onClick="@{(v) -> viewmodel.onClickMyFollowing(item)}"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rlFollower">
+
+                <TextView
+                    android:id="@+id/tvrlFollowingCnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{item.following}"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvrlFollowingCnt"
+                    android:gravity="center"
+                    android:text="팔로잉"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlCount"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{item.desc}"
+            android:textSize="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/rlNormalMy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDesc"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/rlprofile"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:onClick="@{(v) -> viewmodel.onClickProfile(item)}"
+                android:background="@drawable/rect_card_layout"
+                android:stateListAnimator="@anim/elevation_lower">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="프로필 관리"
+                    android:textColor="#616161"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlWallet"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:onClick="@{(v) -> viewmodel.onClickWallet(item)}"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/rlprofile"
+                android:background="@drawable/rect_card_layout"
+                android:stateListAnimator="@anim/elevation_lower">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="전자지갑"
+                    android:textColor="#616161"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlNormalMy"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/rlFollowArtist"
+                android:onClick="@{(v) -> viewmodel.onClickFollow(item)}"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rect_card_layout"
+                android:stateListAnimator="@anim/elevation_lower">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="팔로우"
+                    android:textColor="#616161"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlTip"
+                android:onClick="@{(v) -> viewmodel.onClickTip(item)}"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/rlFollowArtist"
+                android:background="@drawable/rect_card_layout"
+                android:stateListAnimator="@anim/elevation_lower">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Tip"
+                    android:textColor="#616161"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

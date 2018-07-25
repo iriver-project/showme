@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.android.volley.VolleyError
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoContents
+import com.sktelecom.showme.base.Model.VoUserInfo
+import com.sktelecom.showme.base.Model.VoVideo
 import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PFragment
@@ -24,14 +26,14 @@ class MyBodyVM : PViewModel() {
 
 
     override fun asFragCreate(): PFragment {
-        frag = MyBodyFrag.with("title~", this, mICallBack);
+        frag = MyBodyFrag.with(this, mICallBack);
         return frag
     }
 
 
     fun asFragResume(): PFragment {
         if (frag == null)
-            frag = MyBodyFrag.with("title~", this, mICallBack);
+            frag = MyBodyFrag.with(this, mICallBack);
         return frag
     }
 
@@ -64,12 +66,19 @@ class MyBodyVM : PViewModel() {
                     if (isReturn != null && isReturn == "true") {
                         val array = response.getJSONArray("result")
                         var row: JSONObject
-                        val fruitsStringList = ArrayList<VoContents>()
+                        val fruitsStringList = ArrayList<PBean>()
 
+//                        val id: String, val nickName: String, val level: String, val follower: String, val following: String,
+//                        val desc: String, val imgUrl: String, val userType: String) : PBean()
+                        fruitsStringList.add(VoUserInfo("myid", "whoami", "2", "1", "1", "what I am,,,?"
+                                , "http://images6.fanpop.com/image/photos/37800000/-Hello-penguins-of-madagascar-37800672-500-500.gif"
+                                , "AT"))
                         for (i in 0..(array.length() - 1)) {
                             row = array.optJSONObject(i)
-                            fruitsStringList.add(VoContents(row.optString("TITLE"), "type", "desc", row.optString("CONTENTS_ID")))
-                            fruitsStringList.add(VoContents(row.optString("TITLE"), "type", "desc", row.optString("CONTENTS_ID")))
+// val contentsId: String, val heart: String, val title: String, val artistName: String, val artistId: String, val artistImgUrl: String, val imgUrl: String, val videoUrl: String
+
+                            fruitsStringList.add(VoVideo(row.optString("CONTENTS_ID"), row.optString("CONTENTS_TYPE"), row.optString("TITLE"), row.optString("CREATE_USER_NAME")
+                                    , row.optString("CREATE_USER"), row.optString("CREATE_USER_IMG_URL"), row.optString("CREATE_USER_IMG_URL"), row.optString("TITLE")))
                         }
                         msg.what = 0
                         msg.obj = fruitsStringList;
@@ -108,9 +117,43 @@ class MyBodyVM : PViewModel() {
     }
 
 
-    fun onClickOne(v: View, vo: VoContents) {
-        Log.i("DUER", "here Touch!!!", vo.CONTENTS_ID);
+    fun onClickVideo(vo: VoVideo) {
+        Log.i("DUER", "here Touch!!!", vo.artistName);
     }
+
+
+    fun onClickMyLev(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickMyFollower(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickMyFollowing(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickProfile(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickWallet(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickFollow(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickTip(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+
+//    [kapt] An exception occurred: android.databinding.tool.util.LoggedErrorException: Found data binding errors.
+//    ****/ data binding error ****msg:cannot find method onClickOne(android.view.View, com.sktelecom.showme.base.Model.VoContents)
+//    in class com.sktelecom.showme.Main.my.MyBodyVM file:/Users/mang-gogim/AndroidStudioProjects/ShowMe/app/src/main/res/layout/my_item.xml loc:27:38 - 27:66 ****\ data binding error ****
 
 //    override fun onCleared() {
 //        super.onCleared()
