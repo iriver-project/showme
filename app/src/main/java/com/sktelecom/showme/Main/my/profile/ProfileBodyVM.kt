@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.my
+package com.sktelecom.showme.Main.my.profile
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
@@ -8,35 +8,32 @@ import android.os.Handler
 import android.os.Message
 import android.widget.Toast
 import com.android.volley.VolleyError
-import com.sktelecom.showme.Main.MainActivity
-import com.sktelecom.showme.Main.my.follower.FollowActivity
-import com.sktelecom.showme.Main.my.level.LevelActivity
-import com.sktelecom.showme.Main.my.profile.ProfileActivity
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoUserInfo
 import com.sktelecom.showme.base.Model.VoVideo
 import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.util.Log
+import com.sktelecom.showme.base.view.PActivity
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.base.view.PViewModel
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
-class MyBodyVM : PViewModel() {
-    internal val TAG = MyBodyVM::class.java.simpleName
+class ProfileBodyVM : PViewModel() {
+    internal val TAG = ProfileBodyVM::class.java.simpleName
     internal lateinit var fruitList: MutableLiveData<List<PBean>>
 
 
     override fun asFragCreate(): PFragment {
-        frag = MyBodyFrag.with(this, mICallBack);
+        frag = ProfilelBodyFrag.with(this, mICallBack);
         return frag
     }
 
 
     fun asFragResume(): PFragment {
         if (frag == null)
-            frag = MyBodyFrag.with(this, mICallBack);
+            frag = ProfilelBodyFrag.with(this, mICallBack);
         return frag
     }
 
@@ -119,63 +116,25 @@ class MyBodyVM : PViewModel() {
         }
     }
 
+    fun setUserImg(img: String) {
 
-    fun onClickVideo(vo: VoVideo) {
-        Log.i("DUER", "here Touch!!!", vo.artistName);
+        (frag as ProfilelBodyFrag).setUserImg(img)
     }
 
+    fun onClickImage() {
+        Log.i("DUER", "here onClickImage!!!");
+        if (!(frag.activity as PActivity).checkReadExternalStoragePermission()) {
+            return
+        }
+        frag.activity!!.startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), "Choose an image"), 100)
 
-    fun onClickMyLev(vo: VoUserInfo) {
-        Log.i("DUER", "here Touch!!!", vo.id);
-        val intent = Intent(frag.activity, LevelActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 1)
     }
 
-    fun onClickMyFollower(vo: VoUserInfo) {
-        val intent = Intent(frag.activity, FollowActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 2)
-        Log.i("DUER", "here Touch!!!", vo.id);
+    fun onClickSave() {
+        Log.i("DUER", "here onClickSave!!!");
     }
 
-    fun onClickMyFollowing(vo: VoUserInfo) {
-        val intent = Intent(frag.activity, FollowActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 3)
-        Log.i("DUER", "here Touch!!!", vo.id);
-    }
-
-    fun onClickProfile(vo: VoUserInfo) {
-        Log.i("DUER", "here Touch!!!", vo.id);
-        val intent = Intent(frag.activity, ProfileActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 4)
-    }
-
-    fun onClickWallet(vo: VoUserInfo) {
-        Log.i("DUER", "here Touch!!!", vo.id);
-    }
-
-    fun onClickFollow(vo: VoUserInfo) {
-        Log.i("DUER", "here Touch!!!", vo.id);
-    }
-
-    fun onClickTip(vo: VoUserInfo) {
-        Log.i("DUER", "here Touch!!!", vo.id);
-    }
-
-
-//    [kapt] An exception occurred: android.databinding.tool.util.LoggedErrorException: Found data binding errors.
-//    ****/ data binding error ****msg:cannot find method onClickOne(android.view.View, com.sktelecom.showme.base.Model.VoContents)
-//    in class com.sktelecom.showme.Main.my.MyBodyVM file:/Users/mang-gogim/AndroidStudioProjects/ShowMe/app/src/main/res/layout/my_item.xml loc:27:38 - 27:66 ****\ data binding error ****
-
-//    override fun onCleared() {
-//        super.onCleared()
-//        Log.d(TAG, "on cleared called")
-//    }
-
-    internal val mICallBack = object : MyBodyFrag.ICallbackEvent {
+    internal val mICallBack = object : ProfilelBodyFrag.ICallbackEvent {
         override fun getPage(page: Int) {
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
