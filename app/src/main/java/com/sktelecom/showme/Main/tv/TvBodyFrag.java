@@ -76,7 +76,7 @@ public class TvBodyFrag extends PFragment {
         mTransaction.remove(p3.frag);
         mTransaction.remove(p4.frag);
         mTransaction.remove(p5.frag);
-        mTransaction.commit();
+        mTransaction.commitAllowingStateLoss();
         super.onDestroyView();
     }
 
@@ -93,7 +93,6 @@ public class TvBodyFrag extends PFragment {
         binded.pager.setPageTransformer(true, new CubeTransformer());
 
         if (p1 == null) {
-            Log.INSTANCE.i("DUER", "here1");
 
             p1 = ViewModelProviders.of(this).get("p1", TvCommonVM.class);
             p2 = ViewModelProviders.of(this).get("p2", TvCommonVM.class);
@@ -105,9 +104,9 @@ public class TvBodyFrag extends PFragment {
 
             p1.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
             p2.setData("http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8");
-            p3.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
-            p4.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
-            p5.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
+            p3.setData("https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8");
+            p4.setData("https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8");
+            p5.setData("http://www.streambox.fr/playlists/test_001/stream.m3u8");
 
             p1.asFragCreate();
             p2.asFragCreate();
