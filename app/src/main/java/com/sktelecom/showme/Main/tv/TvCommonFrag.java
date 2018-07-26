@@ -98,8 +98,6 @@ public class TvCommonFrag extends PFragment {
 
         //binded.tvTitle.setText(title);
 
-        if(player!=null)
-            player.setPlayWhenReady(true);
     }
 
     @Override
@@ -210,6 +208,24 @@ public class TvCommonFrag extends PFragment {
             player.prepare(videoSource);
         }
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser==false){
+            if(player!=null){
+                player.setPlayWhenReady(false);
+            }
+        }
+        else{
+
+            if(player!=null){
+                player.setPlayWhenReady(true);
+            }
+
+        }
+    }
+
     private void releasePlayer() {
         if (player != null) {
             player.setPlayWhenReady(false);
