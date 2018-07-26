@@ -1,6 +1,7 @@
 package com.sktelecom.showme.Main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.sktelecom.showme.R
@@ -13,6 +14,7 @@ import android.view.MenuItem
 import com.sktelecom.showme.Main.feed.FeedBodyVM
 import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.my.MyBodyVM
+import com.sktelecom.showme.Main.my.level.LevelActivity
 import com.sktelecom.showme.Main.notification.NotificationBodyVM
 import com.sktelecom.showme.Main.tv.TvBodyVM
 
@@ -88,6 +90,10 @@ class MainActivity : PActivity() {
         myVm.asFragCreate()
 
         pFragAdd(binding.frameBody.id, tvVm.asFragResume())
+
+//        val intent = Intent(this, LevelActivity::class.java)
+////        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//        startActivityForResult(intent, 1)
     }
 
 
@@ -97,6 +103,11 @@ class MainActivity : PActivity() {
         prevBottomNavigation.setChecked(true);
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("onDestroy:")
+    }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)

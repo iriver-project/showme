@@ -1,15 +1,12 @@
-package com.sktelecom.showme.Main.my
+package com.sktelecom.showme.Main.my.level
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.content.Intent
 import android.os.Handler
 import android.os.Message
 import android.widget.Toast
 import com.android.volley.VolleyError
-import com.sktelecom.showme.Main.MainActivity
-import com.sktelecom.showme.Main.my.level.LevelActivity
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoUserInfo
 import com.sktelecom.showme.base.Model.VoVideo
@@ -17,24 +14,25 @@ import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.base.view.PViewModel
+import com.sktelecom.showme.databinding.LevelBodyFragBinding
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
-class MyBodyVM : PViewModel() {
-    internal val TAG = MyBodyVM::class.java.simpleName
+class LevelBodyVM : PViewModel() {
+    internal val TAG = LevelBodyVM::class.java.simpleName
     internal lateinit var fruitList: MutableLiveData<List<PBean>>
 
 
     override fun asFragCreate(): PFragment {
-        frag = MyBodyFrag.with(this, mICallBack);
+        frag = LevelBodyFrag.with(this, mICallBack);
         return frag
     }
 
 
     fun asFragResume(): PFragment {
         if (frag == null)
-            frag = MyBodyFrag.with(this, mICallBack);
+            frag = LevelBodyFrag.with(this, mICallBack);
         return frag
     }
 
@@ -125,9 +123,6 @@ class MyBodyVM : PViewModel() {
 
     fun onClickMyLev(vo: VoUserInfo) {
         Log.i("DUER", "here Touch!!!", vo.id);
-        val intent = Intent(frag.activity, LevelActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 1)
     }
 
     fun onClickMyFollower(vo: VoUserInfo) {
@@ -157,14 +152,14 @@ class MyBodyVM : PViewModel() {
 
 //    [kapt] An exception occurred: android.databinding.tool.util.LoggedErrorException: Found data binding errors.
 //    ****/ data binding error ****msg:cannot find method onClickOne(android.view.View, com.sktelecom.showme.base.Model.VoContents)
-//    in class com.sktelecom.showme.Main.my.MyBodyVM file:/Users/mang-gogim/AndroidStudioProjects/ShowMe/app/src/main/res/layout/my_item.xml loc:27:38 - 27:66 ****\ data binding error ****
+//    in class com.sktelecom.showme.Main.my.LevelBodyVM file:/Users/mang-gogim/AndroidStudioProjects/ShowMe/app/src/main/res/layout/my_item.xml loc:27:38 - 27:66 ****\ data binding error ****
 
 //    override fun onCleared() {
 //        super.onCleared()
 //        Log.d(TAG, "on cleared called")
 //    }
 
-    internal val mICallBack = object : MyBodyFrag.ICallbackEvent {
+    internal val mICallBack = object : LevelBodyFrag.ICallbackEvent {
         override fun getPage(page: Int) {
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }

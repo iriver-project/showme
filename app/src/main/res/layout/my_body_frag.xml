@@ -15,13 +15,12 @@
         android:layout_height="match_parent"
         android:background="#F3F2EE">
 
-       
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
             android:drawSelectorOnTop="true"
             android:fastScrollEnabled="true"
             android:scrollbars="vertical" />

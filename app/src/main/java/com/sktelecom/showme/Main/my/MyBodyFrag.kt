@@ -82,9 +82,9 @@ class MyBodyFrag : PFragment() {
 //            }
 //        })
 //        binded.pager.setPageTransformer(true, CubeTransformer())
-        val animation = CircleAngleAnimation(binding.circle, 240)
-        animation.duration = 1000
-        binding.circle.startAnimation(animation)
+//        val animation = CircleAngleAnimation(binding.circle, 240)
+//        animation.duration = 1000
+//        binding.circle.startAnimation(animation)
         return binding.getRoot()
     }
 
