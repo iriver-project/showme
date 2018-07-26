@@ -19,7 +19,6 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-
         <activity android:name=".InitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,6 +52,14 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+
+
+        <activity
+            android:name=".Main.my.profile.ProfileActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
     </application>
 
 </manifest>
