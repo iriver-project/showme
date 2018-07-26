@@ -76,7 +76,7 @@ public class TvBodyFrag extends PFragment {
         mTransaction.remove(p3.frag);
         mTransaction.remove(p4.frag);
         mTransaction.remove(p5.frag);
-        mTransaction.commit();
+        mTransaction.commitAllowingStateLoss();
         super.onDestroyView();
     }
 

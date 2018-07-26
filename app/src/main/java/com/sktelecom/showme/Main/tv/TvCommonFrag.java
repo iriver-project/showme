@@ -2,11 +2,7 @@ package com.sktelecom.showme.Main.tv;
 
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +15,6 @@ import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.Timeline;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.extractor.ExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.LoopingMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
@@ -31,26 +22,16 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.PlaybackControlView;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerControlView;
-import com.google.android.exoplayer2.upstream.Allocator;
-import com.google.android.exoplayer2.upstream.DefaultAllocator;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
-import com.sktelecom.showme.BR;
 import com.sktelecom.showme.R;
-import com.sktelecom.showme.base.Model.EmptyVo;
 import com.sktelecom.showme.base.Model.PBean;
 import com.sktelecom.showme.base.Model.VoContents;
 import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
-import com.sktelecom.showme.databinding.CommonEmptyItemBinding;
-import com.sktelecom.showme.databinding.CommonLoadingItemBinding;
 import com.sktelecom.showme.databinding.TvCommonFragBinding;
-import com.sktelecom.showme.databinding.WalletCommonFragBinding;
-import com.sktelecom.showme.databinding.WalletItemBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,6 +197,11 @@ public class TvCommonFrag extends PFragment {
             binded.playerView.setUseController(true);
             binded.playerView.requestFocus();
             binded.playerView.setPlayer(player);
+
+            binded.playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+
+            //exoVideoView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+            //exoPlayer.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
 
             //prepare
             DefaultHttpDataSourceFactory DATA_SOURCE_FACTORY = new DefaultHttpDataSourceFactory("ua", BANDWIDTH_METER);
