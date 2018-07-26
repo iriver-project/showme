@@ -103,6 +103,8 @@ public class TvCommonFrag extends PFragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.INSTANCE.e("minus", "onStart" + title);
+
         binded.getViewmodel().getList().observe(this, pBeans -> {
             list = pBeans;
             //list created
@@ -115,7 +117,8 @@ public class TvCommonFrag extends PFragment {
 
         //binded.tvTitle.setText(title);
 
-        player.setPlayWhenReady(true);
+        if(player!=null)
+            player.setPlayWhenReady(true);
     }
 
     @Override
@@ -143,7 +146,7 @@ public class TvCommonFrag extends PFragment {
                             //player.setPlayWhenReady(false);
                         }
                         else{
-                            player.setPlayWhenReady(true);
+                            //player.setPlayWhenReady(true);
                         }
                     }
                 }

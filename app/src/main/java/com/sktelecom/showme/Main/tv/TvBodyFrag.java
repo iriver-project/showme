@@ -2,7 +2,6 @@ package com.sktelecom.showme.Main.tv;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +13,7 @@ import android.view.ViewGroup;
 import com.sktelecom.showme.R;
 import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
+import com.sktelecom.showme.base.view.animation.CubeTransformer;
 import com.sktelecom.showme.databinding.TvBodyFragBinding;
 
 public class TvBodyFrag extends PFragment {
@@ -61,6 +61,7 @@ public class TvBodyFrag extends PFragment {
 
     @Override
     public void onDestroyView() {
+
         if (binded != null) {
             ViewGroup parentViewGroup = (ViewGroup) binded.getRoot().getParent();
 
@@ -70,8 +71,11 @@ public class TvBodyFrag extends PFragment {
         }
         FragmentManager mFragmentMgr = getFragmentManager();
         FragmentTransaction mTransaction = mFragmentMgr.beginTransaction();
-        //mTransaction.remove(left.frag);
-        //mTransaction.remove(right.frag);
+        mTransaction.remove(p1.frag);
+        mTransaction.remove(p2.frag);
+        mTransaction.remove(p3.frag);
+        mTransaction.remove(p4.frag);
+        mTransaction.remove(p5.frag);
         mTransaction.commit();
         super.onDestroyView();
     }
@@ -84,7 +88,13 @@ public class TvBodyFrag extends PFragment {
 
     @Override
     public void onCreated() {
+        Log.INSTANCE.i("DUER", "onCreated  !!!!!!!!");
+
+        binded.pager.setPageTransformer(true, new CubeTransformer());
+
         if (p1 == null) {
+            Log.INSTANCE.i("DUER", "here1");
+
             p1 = ViewModelProviders.of(this).get("p1", TvCommonVM.class);
             p2 = ViewModelProviders.of(this).get("p2", TvCommonVM.class);
             p3 = ViewModelProviders.of(this).get("p3", TvCommonVM.class);
