@@ -22,6 +22,14 @@ public class TvCommonVM extends PViewModel {
 
     public MutableLiveData fruitList;
 
+    private String url;
+
+
+    //dataSet
+    public void setData(String url){
+        this.url = url;
+        //this.url = "https://storage.googleapis.com/ratpoisonfactory-147417.appspot.com/golden_gate_bridge_timelapse_hd_stock_video.mp4";
+    }
 
     @NotNull
     @Override
@@ -37,6 +45,11 @@ public class TvCommonVM extends PViewModel {
 
             }
         });
+
+        //setData
+        ((TvCommonFrag)frag).url = url;
+        //((TvCommonFrag)frag).initPlayer();
+
         return frag;
     }
 

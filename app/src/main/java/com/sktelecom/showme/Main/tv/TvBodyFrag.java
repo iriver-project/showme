@@ -20,8 +20,12 @@ public class TvBodyFrag extends PFragment {
     private ICallback mICallback;
 
     private TvBodyFragBinding binded;
-    private TvCommonVM left;
-    private TvCommonVM right;
+    private TvCommonVM p1;
+    private TvCommonVM p2;
+    private TvCommonVM p3;
+    private TvCommonVM p4;
+    private TvCommonVM p5;
+
 
     protected static TvBodyFrag with(ICallback mICallback) {
         TvBodyFrag frag = new TvBodyFrag();
@@ -66,8 +70,8 @@ public class TvBodyFrag extends PFragment {
         }
         FragmentManager mFragmentMgr = getFragmentManager();
         FragmentTransaction mTransaction = mFragmentMgr.beginTransaction();
-        mTransaction.remove(left.frag);
-        mTransaction.remove(right.frag);
+        //mTransaction.remove(left.frag);
+        //mTransaction.remove(right.frag);
         mTransaction.commit();
         super.onDestroyView();
     }
@@ -80,14 +84,27 @@ public class TvBodyFrag extends PFragment {
 
     @Override
     public void onCreated() {
-        if (left == null) {
-            left = ViewModelProviders.of(this).get("LEFT", TvCommonVM.class);
-            right = ViewModelProviders.of(this).get("RIGHT", TvCommonVM.class);
+        if (p1 == null) {
+            p1 = ViewModelProviders.of(this).get("p1", TvCommonVM.class);
+            p2 = ViewModelProviders.of(this).get("p2", TvCommonVM.class);
+            p3 = ViewModelProviders.of(this).get("p3", TvCommonVM.class);
+            p4 = ViewModelProviders.of(this).get("p4", TvCommonVM.class);
+            p5 = ViewModelProviders.of(this).get("p5", TvCommonVM.class);
 
             Log.INSTANCE.i("DUER", "onCreated");
 
-            left.asFragCreate();
-            right.asFragCreate();
+            p1.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
+            p2.setData("http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8");
+            p3.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
+            p4.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
+            p5.setData("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8");
+
+            p1.asFragCreate();
+            p2.asFragCreate();
+            p3.asFragCreate();
+            p4.asFragCreate();
+            p5.asFragCreate();
+
         }
         ViewIconPagerAdapter viewadapter = new ViewIconPagerAdapter(getFragmentManager());
         binded.pager.setAdapter(viewadapter);
@@ -133,9 +150,20 @@ public class TvBodyFrag extends PFragment {
         public PFragment getItem(int num) {
             switch (num) {
                 case 0:
-                    return left.asFragResume();
+                    //return p1.asFragResume();
+                    return p1.asFragResume();
                 case 1:
-                    return right.asFragResume();
+                    //return p2.asFragResume();
+                    return p2.asFragResume();
+                case 2:
+                    //return p3.asFragResume();
+                    return p3.asFragResume();
+                case 3:
+                    //return p4.asFragResume();
+                    return p4.asFragResume();
+                case 4:
+                    //return p5.asFragResume();
+                    return p5.asFragResume();
                 default:
                     return null;
             }
@@ -143,7 +171,7 @@ public class TvBodyFrag extends PFragment {
 
         @Override
         public int getCount() {
-            return 2;
+            return 5;
         }
 
     }
