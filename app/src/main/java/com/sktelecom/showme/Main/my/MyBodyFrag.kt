@@ -20,6 +20,9 @@ import com.sktelecom.showme.base.Model.VoVideo
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.databinding.*
 import java.util.*
+import com.sktelecom.showme.base.view.animation.CircleAngleAnimation
+import com.sktelecom.showme.base.view.animation.Circle
+import com.sktelecom.showme.base.view.animation.CubeTransformer
 
 
 class MyBodyFrag : PFragment() {
@@ -78,11 +81,14 @@ class MyBodyFrag : PFragment() {
 //
 //            }
 //        })
+//        binded.pager.setPageTransformer(true, CubeTransformer())
+        val animation = CircleAngleAnimation(binding.circle, 240)
+        animation.duration = 1000
+        binding.circle.startAnimation(animation)
         return binding.getRoot()
     }
 
     override fun onCreated() {
-
 
     }
 
@@ -165,15 +171,15 @@ class MyBodyFrag : PFragment() {
             val viewHolder = holder as UserInfoViewHolder
             val model = list[position] as VoUserInfo
             viewHolder.bind(model)
-            Glide.with(pCon).load(model.imgUrl).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.ivMyImg)
+            Glide.with(pCon).load("https://pbs.twimg.com/profile_images/547798344567779328/GRhJMA8t_400x400.png").apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.ivMyImg)
         }
 
         internal fun onVideoHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHolder = holder as VideoViewHolder
             val model = list[position] as VoVideo
             viewHolder.bind(model)
-            Glide.with(pCon).load(model.artistImgUrl).into(viewHolder.ibinding.ivArtist)
-            Glide.with(pCon).load(model.imgUrl).into(viewHolder.ibinding.ivImage)
+            Glide.with(pCon).load(model.artistImgUrl).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.ivArtist)
+            Glide.with(pCon).load("https://beataejzenheart.files.wordpress.com/2017/09/zrzut-ekranu-2017-09-27-o-15-45-39.png").into(viewHolder.ibinding.ivImage)
         }
 
 

@@ -5,11 +5,9 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.os.Handler
 import android.os.Message
-import android.view.View
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.sktelecom.showme.base.Model.PBean
-import com.sktelecom.showme.base.Model.VoContents
 import com.sktelecom.showme.base.Model.VoUserInfo
 import com.sktelecom.showme.base.Model.VoVideo
 import com.sktelecom.showme.base.Network.SmartNetWork
