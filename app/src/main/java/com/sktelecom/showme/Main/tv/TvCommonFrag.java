@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -155,11 +156,20 @@ public class TvCommonFrag extends PFragment {
 
                 @Override
                 public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                    //add loading view... gu cha na
-                    if (playbackState == Player.STATE_BUFFERING){
-                        //progressBar.setVisibility(View.VISIBLE);
-                    } else {
-                        //progressBar.setVisibility(View.INVISIBLE);
+                    Log.INSTANCE.i("minus", "status : " + playbackState);
+
+                    switch (playbackState){
+                        case Player.STATE_IDLE :
+                            break;
+                        case Player.STATE_BUFFERING :
+                            binded.loadImg.setVisibility(View.VISIBLE);
+                            Glide.with(getContext()).load(R.drawable.tv_load_img).into(binded.loadImg);
+                            break;
+                        case Player.STATE_READY :
+                            binded.loadImg.setVisibility(View.GONE);
+                            break;
+                        case Player.STATE_ENDED :
+                            break;
                     }
                 }
 
