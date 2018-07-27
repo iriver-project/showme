@@ -11,12 +11,14 @@ import com.sktelecom.showme.base.view.PActivity
 import com.sktelecom.showme.databinding.ActivityMainBinding
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
+import com.sktelecom.showme.Main.common.CommonProfileActivity
 import com.sktelecom.showme.Main.feed.FeedBodyVM
 import com.sktelecom.showme.Main.home.HomeBodyVM
 import com.sktelecom.showme.Main.my.MyBodyVM
 import com.sktelecom.showme.Main.my.level.LevelActivity
 import com.sktelecom.showme.Main.notification.NotificationBodyVM
 import com.sktelecom.showme.Main.tv.TvBodyVM
+import com.sktelecom.showme.Main.upload.VideoPlayerActivity
 
 
 class MainActivity : PActivity() {
@@ -47,7 +49,7 @@ class MainActivity : PActivity() {
                     }
                     R.id.action_feed -> {
 //                        pFragReplace(binding.frameBody.id, feedVm.frag)
-                        startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("video/*"), "Select A 비됴"), 100)
+                        startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("video/*"), "Select A 비됴"), REQUEST_SELECT_VIDEO)
                     }
                     R.id.action_notice -> {
                         pFragReplace(binding.frameBody.id, notiVm.frag)
@@ -102,6 +104,46 @@ class MainActivity : PActivity() {
         prevBottomNavigation.setChecked(false);
         prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(position);
         prevBottomNavigation.setChecked(true);
+    }
+
+
+    internal lateinit var picAddr: String
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (data == null) return
+
+        if (resultCode == RESULT_OK) {  //게시판 게시물 엑티비티에서 넘어온결과.
+            if (requestCode == REQUEST_SELECT_VIDEO) {
+                val imageUri = data.data
+
+                try {
+                    Log.d("image selected path", imageUri!!.path)
+                    Log.i("DUER", CommonUtil.with.getPathFromUri(this, imageUri))
+                    picAddr = CommonUtil.with.getPathFromUri(this, imageUri)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.d("image selected path", imageUri!!.path)
+                    Log.i("DUER", CommonUtil.with.getPath(this, imageUri)!!)
+                    picAddr = CommonUtil.with.getPath(this, imageUri)!!
+                    saveProfileAccount()
+                    return
+                }
+
+                if (picAddr == null)
+                    picAddr = CommonUtil.with.getPath(this, imageUri)!!
+                saveProfileAccount()
+
+            }
+        }
+    }
+
+    fun saveProfileAccount() {
+        val intent = Intent(this, VideoPlayerActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra(VideoPlayerActivity.ACT_TO_ACT_INNER_MOV_ADDR, picAddr)
+        startActivityForResult(intent, 5)
     }
 
 

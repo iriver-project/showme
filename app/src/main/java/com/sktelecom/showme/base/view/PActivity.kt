@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager
 abstract class PActivity : FragmentActivity() {
     var MY_READ_EXTERNAL_STORAGE = 40
     var REQUEST_SELECT_PICTURE = 100
+    var REQUEST_SELECT_VIDEO = 200
     lateinit var mFragMan: FragmentManager
     lateinit var pCon: Context
 
