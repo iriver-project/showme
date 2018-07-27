@@ -4,13 +4,38 @@
     <RelativeLayout
         android:id="@+id/rlMainNavi"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@android:drawable/ic_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:text="기여현황"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/top2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/top"
             android:orientation="horizontal">
-
 
             <RelativeLayout
                 android:id="@+id/rlLeft"
@@ -20,11 +45,11 @@
                 android:clickable="true">
 
                 <TextView
-                    android:layout_width="27dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="27dp"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="나의기여"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -39,10 +64,10 @@
                 android:clickable="true">
 
                 <TextView
-                    android:layout_width="20dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_centerInParent="true"
-                    android:text="2"
+                    android:text=" 기여현황"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -55,9 +80,10 @@
         <LinearLayout
             android:id="@+id/llIndicater"
             android:layout_width="70dp"
-            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:layout_height="1dp"
+            android:layout_below="@+id/top2"
             android:layout_gravity="center"
-            android:layout_marginTop="22dp"
             android:gravity="center_vertical|start"
             android:orientation="horizontal">
 

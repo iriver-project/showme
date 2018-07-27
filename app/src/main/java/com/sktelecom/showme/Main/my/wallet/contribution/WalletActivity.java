@@ -1,12 +1,7 @@
-package com.sktelecom.showme.Wallet;
+package com.sktelecom.showme.Main.my.wallet.contribution;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import com.sktelecom.showme.R;
 import com.sktelecom.showme.base.view.PActivity;

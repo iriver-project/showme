@@ -9,6 +9,7 @@ import android.os.Message
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.sktelecom.showme.Main.my.follower.FollowActivity
+import com.sktelecom.showme.Main.my.wallet.contribution.WalletActivity
 import com.sktelecom.showme.Main.my.wallet.reward.RewardActivity
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoUserInfo
@@ -138,6 +139,10 @@ class WalletInitBodyVM : PViewModel() {
 
     fun onClickContribute() {
         Log.i("DUER", "here onClickContribute!!!");
+        val intent = Intent(frag.activity, WalletActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        frag.activity!!.startActivityForResult(intent, 3)
+
     }
 
     fun onClickExchange() {

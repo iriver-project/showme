@@ -36,7 +36,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".Wallet.WalletActivity"
+            android:name=".Main.my.wallet.contribution.WalletActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />

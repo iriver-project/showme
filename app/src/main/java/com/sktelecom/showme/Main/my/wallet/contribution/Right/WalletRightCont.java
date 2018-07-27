@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Wallet.Right;
+package com.sktelecom.showme.Main.my.wallet.contribution.Right;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,8 +9,8 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.sktelecom.showme.Wallet.WalletBodyFrag;
-import com.sktelecom.showme.Wallet.CommonView.WalletCommonVM;
+import com.sktelecom.showme.Main.my.wallet.contribution.WalletBodyFrag;
+import com.sktelecom.showme.Main.my.wallet.contribution.CommonView.WalletCommonVM;
 import com.sktelecom.showme.base.Model.VoContents;
 import com.sktelecom.showme.base.Network.SmartNetWork;
 import com.sktelecom.showme.base.util.Log;
@@ -71,7 +71,8 @@ public class WalletRightCont extends PController {
 
                         for (int i = 0; i < array.length(); ++i) {
                             row = array.optJSONObject(i);
-                            fruitsStringList.add(new VoContents(row.optString("CONTENTS_ID"), "type", "desc", row.optString("TITLE")));
+                            fruitsStringList.add(new VoContents(row.optString("DESC1"), "type", "desc", row.optString("CREATE_USER_IMG_URL")));
+                            fruitsStringList.add(new VoContents(row.optString("DESC1"), "type", "desc", row.optString("CREATE_USER_IMG_URL")));
                             msg.obj = fruitsStringList;
                         }
                         msg.what = 0;

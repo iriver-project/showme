@@ -3,7 +3,6 @@ package com.sktelecom.showme
 import android.content.Intent
 import android.os.Bundle
 import com.sktelecom.showme.Main.MainActivity
-import com.sktelecom.showme.Wallet.WalletActivity
 import com.sktelecom.showme.base.room.DBManager
 import com.sktelecom.showme.base.util.CommonUtil
 import com.sktelecom.showme.base.util.Log

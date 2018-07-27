@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Wallet.CommonView;
+package com.sktelecom.showme.Main.my.wallet.contribution.CommonView;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.sktelecom.showme.BR;
 import com.sktelecom.showme.base.Model.EmptyVo;
 import com.sktelecom.showme.base.Model.PBean;
@@ -65,7 +67,6 @@ public class WalletCommonFrag extends PFragment {
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mLinearLayoutManager.scrollToPosition(0);
 
-        binded.tvTitle.setText(title);
         binded.rv.setLayoutManager(mLinearLayoutManager);
         binded.rv.setHasFixedSize(true);
         binded.rv.setItemAnimator(new DefaultItemAnimator());
@@ -170,6 +171,8 @@ public class WalletCommonFrag extends PFragment {
             final ContentsViewHolder viewHolder = (ContentsViewHolder) holder;
             final VoContents model = (VoContents) list.get(position);
             viewHolder.bind(model);
+
+            Glide.with(pCon).load(model.getCONTENTS_URL()).apply(new RequestOptions().circleCrop()).into(viewHolder.binding.iv);
 
         }
 

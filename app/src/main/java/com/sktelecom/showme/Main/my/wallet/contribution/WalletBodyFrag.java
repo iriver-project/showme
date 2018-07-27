@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Wallet;
+package com.sktelecom.showme.Main.my.wallet.contribution;
 
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentManager;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sktelecom.showme.R;
-import com.sktelecom.showme.Wallet.Left.WalletLeftCont;
-import com.sktelecom.showme.Wallet.Right.WalletRightCont;
+import com.sktelecom.showme.Main.my.wallet.contribution.Left.WalletLeftCont;
+import com.sktelecom.showme.Main.my.wallet.contribution.Right.WalletRightCont;
 import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.databinding.WalletBodyFragBinding;

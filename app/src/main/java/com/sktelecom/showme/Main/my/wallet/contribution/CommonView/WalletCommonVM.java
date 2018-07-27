@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Wallet.CommonView;
+package com.sktelecom.showme.Main.my.wallet.contribution.CommonView;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.sktelecom.showme.base.Model.PBean;
 import com.sktelecom.showme.base.Model.VoContents;
-import com.sktelecom.showme.Wallet.CommonView.WalletCommonFrag.ICallbackEvent;
+import com.sktelecom.showme.Main.my.wallet.contribution.CommonView.WalletCommonFrag.ICallbackEvent;
 import com.sktelecom.showme.base.util.Log;
 import com.sktelecom.showme.base.view.PFragment;
 import com.sktelecom.showme.base.view.PViewModel;
@@ -20,7 +20,6 @@ public class WalletCommonVM extends PViewModel {
 
     private String TAG = WalletCommonVM.class.getSimpleName();
     private ICallback callback;
-
     public MutableLiveData fruitList;
 
 

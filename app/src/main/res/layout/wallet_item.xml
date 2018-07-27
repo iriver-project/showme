@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.sktelecom.showme.Wallet.CommonView.WalletCommonVM" />
+            type="com.sktelecom.showme.Main.my.wallet.contribution.CommonView.WalletCommonVM" />
 
         <variable
             name="item"
@@ -16,20 +16,46 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:background="@drawable/rect_card_layout"
+        android:onClick="@{(v) -> viewmodel.onClickOne(v, item)}"
+        android:stateListAnimator="@anim/elevation_lower">
 
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp" />
 
         <TextView
-            android:id="@+id/one"
+            android:id="@+id/UserName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:onClick="@{(v) -> viewmodel.onClickOne(v, item)}"
-            android:text="@{item.CONTENTS_URL}"
-            android:textColor="#0096db"
-            android:textSize="22dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/iv"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.CONTENTS_ID}"
+            android:textColor="#4f4f4f"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UserName"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/iv"
+            android:text="투표 : 00 회"
+            android:textColor="#4f4f4f"
+            android:textSize="14dp" />
 
 
     </RelativeLayout>
+
+
 </layout>

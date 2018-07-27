@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Wallet;
+package com.sktelecom.showme.Main.my.wallet.contribution;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
