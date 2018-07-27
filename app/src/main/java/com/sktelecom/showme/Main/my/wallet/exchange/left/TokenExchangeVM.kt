@@ -1,4 +1,4 @@
-package com.sktelecom.showme.Main.my.wallet
+package com.sktelecom.showme.Main.my.wallet.exchange.left
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
@@ -8,10 +8,6 @@ import android.os.Handler
 import android.os.Message
 import android.widget.Toast
 import com.android.volley.VolleyError
-import com.sktelecom.showme.Main.my.follower.FollowActivity
-import com.sktelecom.showme.Main.my.wallet.contribution.WalletActivity
-import com.sktelecom.showme.Main.my.wallet.exchange.ExchangeActivity
-import com.sktelecom.showme.Main.my.wallet.reward.RewardActivity
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoUserInfo
 import com.sktelecom.showme.base.Model.VoVideo
@@ -24,20 +20,20 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
-class WalletInitBodyVM : PViewModel() {
-    internal val TAG = WalletInitBodyVM::class.java.simpleName
+class TokenExchangeVM : PViewModel() {
+    internal val TAG = TokenExchangeVM::class.java.simpleName
     internal lateinit var fruitList: MutableLiveData<List<PBean>>
 
 
     override fun asFragCreate(): PFragment {
-        frag = WalletInitBodyFrag.with(this, mICallBack);
+        frag = TokenExchangeFrag.with(this, mICallBack);
         return frag
     }
 
 
     fun asFragResume(): PFragment {
         if (frag == null)
-            frag = WalletInitBodyFrag.with(this, mICallBack);
+            frag = TokenExchangeFrag.with(this, mICallBack);
         return frag
     }
 
@@ -120,7 +116,6 @@ class WalletInitBodyVM : PViewModel() {
         }
     }
 
-
     fun onClickImage() {
         Log.i("DUER", "here onClickImage!!!");
         if (!(frag.activity as PActivity).checkReadExternalStoragePermission()) {
@@ -130,31 +125,11 @@ class WalletInitBodyVM : PViewModel() {
 
     }
 
-    fun onClickReward() {
-        Log.i("DUER", "here onClickReward!!!")
-        val intent = Intent(frag.activity, RewardActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 3)
+    fun onClickSave() {
+        Log.i("DUER", "here onClickSave!!!");
     }
 
-
-    fun onClickContribute() {
-        Log.i("DUER", "here onClickContribute!!!")
-        val intent = Intent(frag.activity, WalletActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 3)
-
-    }
-
-    fun onClickExchange() {
-        Log.i("DUER", "here onClickExchange!!!")
-        val intent = Intent(frag.activity, ExchangeActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 3)
-    }
-
-
-    internal val mICallBack = object : WalletInitBodyFrag.ICallbackEvent {
+    internal val mICallBack = object : TokenExchangeFrag.ICallbackEvent {
         override fun getPage(page: Int) {
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
