@@ -29,6 +29,7 @@
             android:background="@drawable/btn_white_round"
             android:elevation="4dp"
             android:gravity="center"
+            android:onClick="@{(v) -> viewmodel.onClickImage(item)}"
             android:stateListAnimator="@anim/elevation_lower">
 
             <ImageView

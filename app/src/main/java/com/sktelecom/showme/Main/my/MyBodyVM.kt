@@ -9,6 +9,7 @@ import android.os.Message
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.sktelecom.showme.Main.MainActivity
+import com.sktelecom.showme.Main.common.CommonProfileActivity
 import com.sktelecom.showme.Main.my.follower.FollowActivity
 import com.sktelecom.showme.Main.my.level.LevelActivity
 import com.sktelecom.showme.Main.my.profile.ProfileActivity
@@ -167,6 +168,13 @@ class MyBodyVM : PViewModel() {
 
     fun onClickTip(vo: VoUserInfo) {
         Log.i("DUER", "here Touch!!!", vo.id);
+    }
+
+    fun onClickImage(vo: VoUserInfo) {
+        Log.i("DUER", "here Touch!!!", vo.id);
+        val intent = Intent(frag.activity, CommonProfileActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        frag.activity!!.startActivityForResult(intent, 5)
     }
 
 

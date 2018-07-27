@@ -46,7 +46,8 @@ class MainActivity : PActivity() {
                         pFragReplace(binding.frameBody.id, tvVm.frag)
                     }
                     R.id.action_feed -> {
-                        pFragReplace(binding.frameBody.id, feedVm.frag)
+//                        pFragReplace(binding.frameBody.id, feedVm.frag)
+                        startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("video/*"), "Select A 비됴"), 100)
                     }
                     R.id.action_notice -> {
                         pFragReplace(binding.frameBody.id, notiVm.frag)
