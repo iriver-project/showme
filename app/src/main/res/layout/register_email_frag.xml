@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.sktelecom.showme.selectlogin.register.RegisterVM" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rrMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="140dp"
+            android:gravity="center_vertical"
+            android:hint="이메일을 입력하세용"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+
+    </RelativeLayout>
+</layout>

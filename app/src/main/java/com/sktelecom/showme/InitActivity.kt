@@ -7,6 +7,7 @@ import com.sktelecom.showme.base.room.DBManager
 import com.sktelecom.showme.base.util.CommonUtil
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PActivity
+import com.sktelecom.showme.selectlogin.SelectLoginActivity
 
 class InitActivity : PActivity() {
     override fun onAfaterCreate(savedInstanceState: Bundle?) {

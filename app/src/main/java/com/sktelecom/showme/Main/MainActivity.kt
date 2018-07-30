@@ -19,6 +19,7 @@ import com.sktelecom.showme.Main.my.level.LevelActivity
 import com.sktelecom.showme.Main.notification.NotificationBodyVM
 import com.sktelecom.showme.Main.tv.TvBodyVM
 import com.sktelecom.showme.Main.upload.VideoPlayerActivity
+import com.sktelecom.showme.selectlogin.SelectLoginActivity
 
 
 class MainActivity : PActivity() {
@@ -94,11 +95,19 @@ class MainActivity : PActivity() {
 
         pFragAdd(binding.frameBody.id, tvVm.asFragResume())
 
+        startReg()
+
 //        val intent = Intent(this, LevelActivity::class.java)
 ////        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
 //        startActivityForResult(intent, 1)
     }
 
+
+    internal fun startReg() {
+        val intent = Intent(pCon, SelectLoginActivity::class.java)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
+        startActivity(intent)
+    }
 
     internal fun selectedPage(position: Int) {
         prevBottomNavigation.setChecked(false);
