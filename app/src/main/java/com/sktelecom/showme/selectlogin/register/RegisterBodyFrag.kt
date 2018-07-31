@@ -108,6 +108,11 @@ class RegisterBodyFrag : PFragment() {
         binded.regPager.setCurrentItem(postion, true)
     }
 
+
+    fun setUserImg(url :String){
+        mVM.setUserImg(url)
+    }
+
     companion object {
         fun with(mICallback: ICallback): RegisterBodyFrag {
             val frag = RegisterBodyFrag()

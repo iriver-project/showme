@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.view.PFragment
@@ -38,6 +40,11 @@ class RegisterUserInfoFrag : PFragment() {
     override fun onCreated() {
 
     }
+
+    fun setUserImg(url :String){
+        Glide.with(pCon).load(url).apply(RequestOptions().circleCrop()).into(binding.ivMyImg)
+    }
+
 
     interface ICallbackEvent {
         fun getPage(page: Int)

@@ -1,8 +1,10 @@
 package com.sktelecom.showme.selectlogin.register
 
 import android.arch.lifecycle.MutableLiveData
+import android.content.Intent
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.util.Log
+import com.sktelecom.showme.base.view.PActivity
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.base.view.PViewModel
 
@@ -45,6 +47,14 @@ class RegisterVM : PViewModel() {
 
     fun onClickImage() {
         Log.i("DUER", "here onClickImage!!!");
+        if (!(frag3.activity as PActivity).checkReadExternalStoragePermission()) {
+            return
+        }
+        frag3.activity!!.startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), "Choose an image"), 100)
+    }
+
+    fun setUserImg(url :String){
+        frag3.setUserImg(url)
     }
 
 

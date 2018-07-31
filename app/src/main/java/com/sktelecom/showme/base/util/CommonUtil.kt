@@ -53,54 +53,59 @@ class CommonUtil private constructor() {
 
     fun getPath(context: Context, uri: Uri): String? {
 
-        // DocumentProvider
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (DocumentsContract.isDocumentUri(context, uri)) {
-                // ExternalStorageProvider
-                if (isExternalStorageDocument(uri)) {
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                    val type = split[0]
+        try {
 
-                    if ("primary".equals(type, ignoreCase = true)) {
-                        return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
-                    }
+            // DocumentProvider
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (DocumentsContract.isDocumentUri(context, uri)) {
+                    // ExternalStorageProvider
+                    if (isExternalStorageDocument(uri)) {
+                        val docId = DocumentsContract.getDocumentId(uri)
+                        val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                        val type = split[0]
 
-                    //  handle non-primary volumes
-                } else if (isDownloadsDocument(uri)) {
+                        if ("primary".equals(type, ignoreCase = true)) {
+                            return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+                        }
 
-                    val id = DocumentsContract.getDocumentId(uri)
-                    val contentUri = ContentUris.withAppendedId(
-                            Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
+                        //  handle non-primary volumes
+                    } else if (isDownloadsDocument(uri)) {
 
-                    return getDataColumn(context, contentUri, null, null)
-                } else if (isMediaDocument(uri)) {
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                    val type = split[0]
+                        val id = DocumentsContract.getDocumentId(uri)
+                        val contentUri = ContentUris.withAppendedId(
+                                Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
 
-                    var contentUri: Uri? = null
-                    if ("image" == type) {
-                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    } else if ("video" == type) {
-                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-                    } else if ("audio" == type) {
-                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-                    }
+                        return getDataColumn(context, contentUri, null, null)
+                    } else if (isMediaDocument(uri)) {
+                        val docId = DocumentsContract.getDocumentId(uri)
+                        val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                        val type = split[0]
 
-                    val selection = "_id=?"
-                    val selectionArgs = arrayOf(split[1])
+                        var contentUri: Uri? = null
+                        if ("image" == type) {
+                            contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                        } else if ("video" == type) {
+                            contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                        } else if ("audio" == type) {
+                            contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                        }
 
-                    return getDataColumn(context, contentUri, selection, selectionArgs)
-                }// MediaProvider
-                // DownloadsProvider
-            }
-        } else if ("content".equals(uri.scheme, ignoreCase = true)) {
-            return getDataColumn(context, uri, null, null)
-        } else if ("file".equals(uri.scheme, ignoreCase = true)) {
-            return uri.path
-        }// File
-        // MediaStore (and general)
+                        val selection = "_id=?"
+                        val selectionArgs = arrayOf(split[1])
+
+                        return getDataColumn(context, contentUri, selection, selectionArgs)
+                    }// MediaProvider
+                    // DownloadsProvider
+                }
+            } else if ("content".equals(uri.scheme, ignoreCase = true)) {
+                return getDataColumn(context, uri, null, null)
+            } else if ("file".equals(uri.scheme, ignoreCase = true)) {
+                return uri.path
+            }// File
+            // MediaStore (and general)
+        }catch (e:Exception){
+
+        }
 
 
         return null

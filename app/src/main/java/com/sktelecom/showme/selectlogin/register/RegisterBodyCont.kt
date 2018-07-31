@@ -51,6 +51,10 @@ class RegisterBodyCont(context: Context, mICallbackToAct: ICallbackToAct) : PCon
 
     }
 
+    fun setUserImg(url:String){
+        (frag as RegisterBodyFrag).setUserImg(url)
+    }
+
 
     interface ICallbackToAct {
         fun selected(position: Int)

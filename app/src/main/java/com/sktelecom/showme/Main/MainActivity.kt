@@ -4,21 +4,19 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.view.MenuItem
+import com.sktelecom.showme.Main.feed.FeedBodyVM
+import com.sktelecom.showme.Main.home.HomeBodyVM
+import com.sktelecom.showme.Main.my.MyBodyVM
+import com.sktelecom.showme.Main.notification.NotificationBodyVM
+import com.sktelecom.showme.Main.tv.TvBodyVM
+import com.sktelecom.showme.Main.upload.VideoPlayerActivity
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.util.CommonUtil
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PActivity
 import com.sktelecom.showme.databinding.ActivityMainBinding
-import android.support.design.widget.BottomNavigationView
-import android.view.MenuItem
-import com.sktelecom.showme.Main.common.CommonProfileActivity
-import com.sktelecom.showme.Main.feed.FeedBodyVM
-import com.sktelecom.showme.Main.home.HomeBodyVM
-import com.sktelecom.showme.Main.my.MyBodyVM
-import com.sktelecom.showme.Main.my.level.LevelActivity
-import com.sktelecom.showme.Main.notification.NotificationBodyVM
-import com.sktelecom.showme.Main.tv.TvBodyVM
-import com.sktelecom.showme.Main.upload.VideoPlayerActivity
 import com.sktelecom.showme.selectlogin.SelectLoginActivity
 
 
@@ -34,22 +32,33 @@ class MainActivity : PActivity() {
     internal lateinit var notiVm: NotificationBodyVM
     internal lateinit var myVm: MyBodyVM
 
+    private var singleMarginLeftSize = 0f
+
     override fun onAfaterCreate(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         Log.i(CommonUtil.with.now())
         binding.executePendingBindings()
 
+        val display = pCon.resources.displayMetrics
+        singleMarginLeftSize = display.widthPixels.toFloat() / 5
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+
                 when (item.getItemId()) {
                     R.id.action_home -> {
                         pFragReplace(binding.frameBody.id, homeVm.frag)
+
                     }
                     R.id.action_tv -> {
                         pFragReplace(binding.frameBody.id, tvVm.frag)
                     }
                     R.id.action_feed -> {
 //                        pFragReplace(binding.frameBody.id, feedVm.frag)
+                        if (!checkReadExternalStoragePermission()) {
+                            return false
+                        }
                         startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("video/*"), "Select A 비됴"), REQUEST_SELECT_VIDEO)
                     }
                     R.id.action_notice -> {
@@ -59,6 +68,10 @@ class MainActivity : PActivity() {
                         pFragReplace(binding.frameBody.id, myVm.frag)
                     }
                 }
+//                var x:Int = singleMarginLeftSize.roundToInt()
+//                var y:Int = binding.bottomNavigation.y.roundToInt()
+//
+//                UAnimation.with().toggleInformationViewToBeVisibleOnly(applicationContext, x, y, binding.frameBody)
                 return true
             }
         })
