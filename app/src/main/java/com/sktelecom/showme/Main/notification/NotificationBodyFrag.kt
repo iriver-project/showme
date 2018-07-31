@@ -43,10 +43,15 @@ class NotificationBodyFrag : PFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.notification_body_frag, container, false)
 //        binding.viewmodel = NotificationBodyVM()
         binding.viewmodel = vm
-        binding.viewmodel!!.getList().observe(this, Observer {
-            list = it as ArrayList<PBean>
+        if (list.size <= 0) {
+            binding.viewmodel!!.getList().observe(this, Observer {
+                list = it as ArrayList<PBean>
+                mListAdapter.addDataToBottom(EmptyVo())
+                binding.rv.setAdapter(mListAdapter)
+            })
+        }else{
             binding.rv.setAdapter(mListAdapter)
-        });
+        }
         mLinearLayoutManager = LinearLayoutManager(pCon)
         mLinearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mLinearLayoutManager.scrollToPosition(0)
@@ -67,8 +72,6 @@ class NotificationBodyFrag : PFragment() {
 //        })
 
         mListAdapter = CommonListAdapter()
-
-        mListAdapter.addDataToBottom(EmptyVo())
         return binding.getRoot()
     }
 
