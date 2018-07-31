@@ -9,6 +9,8 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.sktelecom.showme.BR
 import com.sktelecom.showme.base.Model.EmptyVo
 import com.sktelecom.showme.base.Model.PBean
@@ -148,7 +150,7 @@ class NotificationBodyFrag : PFragment() {
             val viewHolder = holder as ContentsViewHolder
             val model = list[position] as VoContents
             viewHolder.bind(model)
-
+            Glide.with(pCon).load(model.CONTENTS_URL).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.iv)
 
             //            viewHolder.binding.rrPurchased.setOnClickListener(view -> {
             //                if (mICallbackEvent != null)
