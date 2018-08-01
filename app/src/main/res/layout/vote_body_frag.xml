@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="viewmodel"
-            type="com.sktelecom.showme.Main.home.HomeBodyVM" />
+            type="com.sktelecom.showme.Main.common.CommonVoteBodyVM" />
 
     </data>
 
@@ -17,16 +16,26 @@
 
 
         <RelativeLayout
+            android:id="@+id/top"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@android:drawable/ic_delete" />
 
             <TextView
-                android:id="@+id/home_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textSize="18sp"
-                tools:text="title" />
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:text="투표하기"
+                android:textColor="#000000"
+                android:textSize="20dp" />
         </RelativeLayout>
 
 
@@ -47,24 +56,20 @@
                     <ImageView
                         android:id="@+id/stage_img"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp" />
+                        android:layout_height="wrap_content" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="200dp">
-
-                        <Spinner
-                            android:id="@+id/stage_spn"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentLeft="true" />
+                        android:layout_height="100dp"
+                        android:background="#FFDADADA">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
                             android:text="종료일까지 00일 00시간 00분" />
-
 
                         <TextView
                             android:layout_width="match_parent"
@@ -73,54 +78,32 @@
                             android:layout_below="@+id/stage_spn"
                             android:layout_marginTop="26dp"
                             android:gravity="center"
-                            android:text="Groovy Room BEAT\nStage 1"
+                            android:text="Stage 1"
                             android:textSize="30sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:text="000" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:text="000k" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:text="000" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:text="000" />
-
-                        </LinearLayout>
                     </RelativeLayout>
                 </FrameLayout>
 
-                <Button
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:onClick="@{(v) -> viewmodel.onClickVote(v)}"
-                    android:text="투표하기" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="유저의 선택" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나의 투표권 : 매일 5회 남은 투표권 : 1회" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/select_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -133,13 +116,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="아티스트 목록" />
+                        android:text="아티스트" />
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/artist_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="투표 완료" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>

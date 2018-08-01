@@ -1,16 +1,13 @@
-package com.sktelecom.showme.Main.home
+package com.sktelecom.showme.Main.common
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.content.Intent
 import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.android.volley.VolleyError
-import com.sktelecom.showme.Main.common.CommonProfileActivity
-import com.sktelecom.showme.Main.common.CommonVoteActivity
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoContents
 import com.sktelecom.showme.base.Network.SmartNetWork
@@ -19,15 +16,13 @@ import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.base.view.PViewModel
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.*
 
-class HomeBodyVM : PViewModel() {
-    internal val TAG = HomeBodyVM::class.java.simpleName
+class CommonVoteBodyVM : PViewModel() {
+    internal val TAG = CommonVoteBodyVM::class.java.simpleName
     internal lateinit var fruitList: MutableLiveData<List<PBean>>
 
-
     override fun asFragCreate(): PFragment {
-        frag = HomeBodyFrag.with("AUDITION", this, mICallBack)
+        frag = CommonVoteBodyFrag.with(this, mICallBack)
         return frag
     }
 
@@ -109,22 +104,12 @@ class HomeBodyVM : PViewModel() {
         }
     }
 
-
-    fun onClickOne(v: View, vo: VoContents) {
-        Log.i("DUER", "here Touch!!!", vo.CONTENTS_ID)
-    }
-
     fun onClickArtist(v: View, vo: VoContents) {
         Log.i("DUER", "here Touch!!!", vo.CONTENTS_ID)
-        val intent = Intent(frag.activity, CommonProfileActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 1)
     }
 
-    fun onClickVote(v: View) {
-        val intent = Intent(frag.activity, CommonVoteActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        frag.activity!!.startActivityForResult(intent, 2)
+    fun onClickVoteComplete(v: View, vo: VoContents) {
+        Log.i("DUER", "here Touch!!!", vo.CONTENTS_ID)
     }
 
 //    override fun onCleared() {
@@ -132,7 +117,7 @@ class HomeBodyVM : PViewModel() {
 //        Log.d(TAG, "on cleared called")
 //    }
 
-    internal val mICallBack = object : HomeBodyFrag.ICallbackEvent {
+    internal val mICallBack = object : CommonVoteBodyFrag.ICallbackEvent {
         override fun getPage(page: Int) {
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
