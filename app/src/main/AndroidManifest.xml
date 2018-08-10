@@ -114,6 +114,14 @@
             android:theme="@style/AppInitActTheme2"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
+
+        <service
+            android:name=".base.push.FirebaseMessagingService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -3,8 +3,16 @@ package com.sktelecom.showme.Main.notification
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Message
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.widget.Toast
 import com.android.volley.VolleyError
@@ -106,6 +114,8 @@ class NotificationBodyVM : PViewModel() {
             }
         }
     }
+
+
 
 
     fun onClickOne(v: View, vo: VoContents) {

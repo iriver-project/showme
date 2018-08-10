@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "514439063213",
+    "firebase_url": "https://showme-ba0a0.firebaseio.com",
+    "project_id": "showme-ba0a0",
+    "storage_bucket": "showme-ba0a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514439063213:android:50865823f49bd38d",
+        "android_client_info": {
+          "package_name": "com.sktelecom.showme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514439063213-q4og5j8refvl70f0nbh71fsko1gd53vc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_jBFI9WcFcMJbbLYWA9h6RX6ZKv6-L9c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

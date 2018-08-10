@@ -1,10 +1,16 @@
 package com.sktelecom.showme.selectlogin.login
 
 import android.arch.lifecycle.MutableLiveData
+import com.android.volley.VolleyError
 import com.sktelecom.showme.base.Model.PBean
+import com.sktelecom.showme.base.Model.VoContents
+import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.base.view.PViewModel
+import org.json.JSONException
+import org.json.JSONObject
+import java.util.ArrayList
 
 class LoginVM : PViewModel() {
     internal val TAG = LoginVM::class.java.simpleName
@@ -34,9 +40,69 @@ class LoginVM : PViewModel() {
     }
 
 
+    internal fun login() {
+        val param = JSONObject()
+        try {
+            param.put("userId", "comperge@naver.com")
+            param.put("userPw", "1111")
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+//        Connection=keep-alive, Content-Type=application/json;charset=UTF-8
+//        val url = SmartNetWork.URL + "user/login?userId=comperge@naver.com&userPw=1111"
+        val url = SmartNetWork.URL + "user/login"
+        Log.i("DUER", url)
+        SmartNetWork().getCommonDataPostParamCookie(frag1.pActivity, url, param, object : SmartNetWork.SmartNetWorkListener {
+            override fun onResponse(Tag: Int, response: JSONObject) {
+                try {
+                    Log.i(" 결과 getSellingContentsList_2=" + response.toString())
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onErrorResponse(Tag: Int, error: VolleyError) {
+                Log.i("DUER...............................>>ERROR_Tag", Tag)
+
+            }
+        })
+    }
+
+
+    internal fun gets() {
+        val param = JSONObject()
+        try {
+            param.put("menuTypeCd", "MT0BASIC11")
+            param.put("limit", "5")
+            param.put("pg", "1")
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val url = SmartNetWork.URL_SHOW_ME + "display/menu/gets"
+        Log.i("DUER", url)
+        SmartNetWork().getCommonDataPostParamCookie(frag1.pActivity, url, param, object : SmartNetWork.SmartNetWorkListener {
+            override fun onResponse(Tag: Int, response: JSONObject) {
+                try {
+                    Log.i(" 결과 /gets=" + response.toString())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onErrorResponse(Tag: Int, error: VolleyError) {
+                Log.i("DUER...............................>>ERROR_Tag", Tag)
+
+            }
+        })
+    }
+
+
     fun onClickLogin() {
         Log.i("DUER", "here onClickLogin!!!");
-        frag1.activity!!.finish()
+        login()
+//        gets()
     }
 
 

@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -60,7 +62,8 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
-
+    compile 'com.google.firebase:firebase-messaging:17.1.0'
+    compile 'com.google.firebase:firebase-core:16.0.1'
 
     kapt "android.arch.persistence.room:compiler:$room_version"
 
@@ -81,3 +84,4 @@ dependencies {
     //exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
 }
+
