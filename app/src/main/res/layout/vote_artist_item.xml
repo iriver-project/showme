@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.sktelecom.showme.base.Model.VoContents" />
+            type="com.sktelecom.showme.base.Model.VoArtist" />
 
     </data>
 
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{item.CONTENTS_ID}"
+                android:text="@{item.atstNm}"
                 tools:text="artist name" />
         </LinearLayout>
 

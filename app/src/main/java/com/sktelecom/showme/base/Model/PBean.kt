@@ -10,6 +10,9 @@ abstract class PBean {
 
         var TYPE_USER_INFO = 101;
         var TYPE_ITEM_VIDEO = 102;
+
+        var TYPE_STAGE = 301
+        var TYPE_ARTIST = 302
     }
 
 }

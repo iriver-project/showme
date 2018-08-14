@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.sktelecom.showme.BR
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.Model.PBean
-import com.sktelecom.showme.base.Model.VoContents
+import com.sktelecom.showme.base.Model.VoArtist
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.databinding.ArtistItemBinding
 import com.sktelecom.showme.databinding.HomeBodyFragBinding
@@ -63,9 +63,8 @@ class HomeBodyFrag : PFragment() {
 
             override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
             }
-
         }
-        
+
         return binding.root
     }
 
@@ -86,14 +85,14 @@ class HomeBodyFrag : PFragment() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHolder = holder as ArtistViewHolder
-            val model = list[position] as VoContents
+            val model = list[position] as VoArtist
             viewHolder.bind(model)
-            Glide.with(pCon).load("https://post-phinf.pstatic.net/MjAxNzAxMTFfOTkg/MDAxNDg0MTMzMTMzNzcy.Gf1kb2nOHDXSEEEGsTCKHJwoWef1XQxTFOH09MBL6d0g.9-YbfPG9neKPHz1mX_Sj-Y-NgJxy0aPOfMCwFd7_ahEg.JPEG/mug_obj_201701112012145347.jpg?type=w1080").apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
+            Glide.with(pCon).load(model.atstThumbnail).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
         }
 
         internal inner class ArtistViewHolder internal constructor(val ibinding: ArtistItemBinding) : RecyclerView.ViewHolder(ibinding.root) {
 
-            internal fun bind(model: VoContents) {
+            internal fun bind(model: VoArtist) {
                 ibinding.setVariable(BR.item, model)
                 ibinding.setVariable(BR.viewmodel, binding.viewmodel)
             }

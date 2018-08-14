@@ -12,6 +12,7 @@ import com.android.volley.VolleyError
 import com.sktelecom.showme.Main.common.CommonProfileActivity
 import com.sktelecom.showme.Main.common.CommonVoteActivity
 import com.sktelecom.showme.base.Model.PBean
+import com.sktelecom.showme.base.Model.VoArtist
 import com.sktelecom.showme.base.Model.VoContents
 import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.util.Log
@@ -23,7 +24,7 @@ import java.util.*
 
 class HomeBodyVM : PViewModel() {
     internal val TAG = HomeBodyVM::class.java.simpleName
-    internal lateinit var fruitList: MutableLiveData<List<PBean>>
+    internal lateinit var resultList: MutableLiveData<List<PBean>>
 
 
     override fun asFragCreate(): PFragment {
@@ -39,42 +40,39 @@ class HomeBodyVM : PViewModel() {
     }
 
     fun getList(): LiveData<List<PBean>> {
-        fruitList = MutableLiveData()
+        resultList = MutableLiveData()
         callList()
-        return fruitList
+        return resultList
     }
 
     internal fun callList() {
         val param = JSONObject()
         try {
-            param.put("vocaType", "GT")
-            param.put("id", "aaaa@aaaa")
-            param.put("startRow", "0")
-            param.put("numberOfRow", 50)
-            param.put("contentsType", "115")
+            param.put("stagNo", 10000000002)
+            param.put("prevStagNo", 10000000001)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
-        val url = SmartNetWork.URL + "getSellingContentsList_2"
-        Log.i("DUER", url)
+        val url = SmartNetWork.URL_SHOW_ME + "display/stage/artist/gets"
+        Log.i("get artist url :: ", url)
         SmartNetWork().getCommonDataPostParam(frag.pActivity, url, param, object : SmartNetWork.SmartNetWorkListener {
             override fun onResponse(Tag: Int, response: JSONObject) {
                 try {
-                    Log.i(" 결과 getSellingContentsList_2=" + response.toString())
+                    Log.i("get artist result :: " + response.toString())
                     val msg = updateHandler.obtainMessage()
-                    val isReturn = response.optString("return")
-                    if (isReturn != null && isReturn == "true") {
-                        val array = response.getJSONArray("result")
+                    val isReturn = response.optString("resCd")
+                    if (isReturn != null && isReturn == "0000") {
+                        val array = response.getJSONArray("data")
                         var row: JSONObject
-                        val fruitsStringList = ArrayList<PBean>()
+                        val artistStringList = ArrayList<PBean>()
 
                         for (i in 0..(array.length() - 1)) {
                             row = array.optJSONObject(i)
-                            fruitsStringList.add(VoContents(row.optString("CONTENTS_ID"), "type", "desc", row.optString("TITLE")))
+                            artistStringList.add(VoArtist(row.optString("atstId"), row.optString("atstNm"), row.optString("atstThumbnail"), row.optInt("ststStagRank")))
                         }
                         msg.what = 0
-                        msg.obj = fruitsStringList
+                        msg.obj = artistStringList
                     } else {
                         msg.what = 0
                     }
@@ -104,7 +102,7 @@ class HomeBodyVM : PViewModel() {
                 //                    frag.getActivity().finish();
             } else if (msg.what == 0) {
 
-                fruitList.setValue(msg.obj as List<PBean>?)
+                resultList.setValue(msg.obj as List<PBean>?)
             }
         }
     }
@@ -114,8 +112,8 @@ class HomeBodyVM : PViewModel() {
         Log.i("DUER", "here Touch!!!", vo.CONTENTS_ID)
     }
 
-    fun onClickArtist(v: View, vo: VoContents) {
-        Log.i("DUER", "here Touch!!!", vo.CONTENTS_ID)
+    fun onClickArtist(v: View, vo: VoArtist) {
+        Log.i("DUER", "Touch Artist == ", vo.atstId)
         val intent = Intent(frag.activity, CommonProfileActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         frag.activity!!.startActivityForResult(intent, 1)
