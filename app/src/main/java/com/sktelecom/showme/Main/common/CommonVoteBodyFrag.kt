@@ -8,12 +8,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sktelecom.showme.BR
 import com.sktelecom.showme.R
 import com.sktelecom.showme.base.Model.PBean
-import com.sktelecom.showme.base.Model.VoContents
+import com.sktelecom.showme.base.Model.VoArtist
 import com.sktelecom.showme.base.view.PFragment
 import com.sktelecom.showme.databinding.VoteArtistItemBinding
 import com.sktelecom.showme.databinding.VoteBodyFragBinding
@@ -30,7 +31,7 @@ class CommonVoteBodyFrag : PFragment() {
     internal var list: ArrayList<PBean> = ArrayList()
 
     internal lateinit var mListAdapter: SelectListAdapter
-    internal var selectList: ArrayList<VoContents> = ArrayList()
+    internal var selectList: ArrayList<VoArtist> = ArrayList()
 
 
     override fun onCreated() {
@@ -78,12 +79,17 @@ class CommonVoteBodyFrag : PFragment() {
             val viewHolder = holder as SelectViewHolder
             val model = selectList[position]
             viewHolder.bind(model)
-            Glide.with(pCon).load("https://post-phinf.pstatic.net/MjAxNzAxMTFfOTkg/MDAxNDg0MTMzMTMzNzcy.Gf1kb2nOHDXSEEEGsTCKHJwoWef1XQxTFOH09MBL6d0g.9-YbfPG9neKPHz1mX_Sj-Y-NgJxy0aPOfMCwFd7_ahEg.JPEG/mug_obj_201701112012145347.jpg?type=w1080").apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
+            Glide.with(pCon).load(model.atstThumbnail).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
+            viewHolder.ibinding.cancelImg.visibility = View.VISIBLE
+            viewHolder.ibinding.cancelImg.setOnClickListener({
+                selectList.remove(model)
+                binding.selectRv.adapter = mListAdapter
+            })
         }
 
         internal inner class SelectViewHolder internal constructor(val ibinding: VoteArtistItemBinding) : RecyclerView.ViewHolder(ibinding.root) {
 
-            internal fun bind(model: VoContents) {
+            internal fun bind(model: VoArtist) {
                 ibinding.setVariable(BR.item, model)
                 ibinding.setVariable(BR.viewmodel, binding.viewmodel)
             }
@@ -102,19 +108,22 @@ class CommonVoteBodyFrag : PFragment() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHolder = holder as ArtistViewHolder
-            val model = list[position] as VoContents
+            val model = list[position] as VoArtist
             viewHolder.bind(model)
-            Glide.with(pCon).load("https://post-phinf.pstatic.net/MjAxNzAxMTFfOTkg/MDAxNDg0MTMzMTMzNzcy.Gf1kb2nOHDXSEEEGsTCKHJwoWef1XQxTFOH09MBL6d0g.9-YbfPG9neKPHz1mX_Sj-Y-NgJxy0aPOfMCwFd7_ahEg.JPEG/mug_obj_201701112012145347.jpg?type=w1080").apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
+            Glide.with(pCon).load(model.atstThumbnail).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
 
             viewHolder.ibinding.artistImg.setOnClickListener({
-                selectList.add(model)
-                binding.selectRv.adapter = mListAdapter
+                if (model !in selectList) {
+                    selectList.add(0, model)
+                    binding.selectRv.adapter = mListAdapter
+                } else
+                    Toast.makeText(pCon, "이미 선택한 아티스트", Toast.LENGTH_SHORT).show()
             })
         }
 
         internal inner class ArtistViewHolder internal constructor(val ibinding: VoteArtistItemBinding) : RecyclerView.ViewHolder(ibinding.root) {
 
-            internal fun bind(model: VoContents) {
+            internal fun bind(model: VoArtist) {
                 ibinding.setVariable(BR.item, model)
                 ibinding.setVariable(BR.viewmodel, binding.viewmodel)
             }
