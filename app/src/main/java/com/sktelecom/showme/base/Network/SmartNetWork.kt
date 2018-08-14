@@ -50,13 +50,23 @@ class SmartNetWork {
         doRequestVolley(ctx, jsObjRequest)
     }
 
-    fun getCommonDataPostParam(ctx: Context, url: String, param: JSONObject?, netWorkListener: SmartNetWorkListener) {
-        var param = param
-        Log.i("DUER>>>>>>>>>>>>>", url)
-        if (param == null) {
-            Log.i("DUER>>>>>>>>>>>>>param is null")
-            param = JSONObject()
+    fun getCommonDataPostParam(ctx: Context, url: String, param: JSONObject, netWorkListener: SmartNetWorkListener) {
+        var url = url;
+        Log.i("DUER>>>>>>>>>>>>>url=", url)
+        var i = 0;
+        val key = param.keys()
+        while (key.hasNext()) {
+            val b = key.next().toString()
+            Log.d("˜˜˜˜", b)
+            if (i == 0) {
+                url += "?"
+            } else {
+                url += "&"
+            }
+            url = url + b + "=" + param.getString(b)
+            ++i
         }
+
         val jsObjRequest = JsonObjectRequest(Request.Method.POST, url, param, Response.Listener { response ->
             //
             netWorkListener.onResponse(0, response)
@@ -102,7 +112,7 @@ class SmartNetWork {
                 } else {
                     url = url + "&"
                 }
-                url = url + b + "=" + param.getString(b);
+                url = url + b + "=" + param.getString(b)
 
                 ++i
             }
