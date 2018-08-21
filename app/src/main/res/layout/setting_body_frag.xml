@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="cont"
+            type="com.sktelecom.showme.setting.SettingBodyCont" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F3F2EE"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@android:drawable/ic_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:text="설정"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/rrMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="#F3F2EE"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="계정"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:text="프로필 관리"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvChangePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:text="비밀번호 변경"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvActivyGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="활동 그룹"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvVerifiy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="본인 인증"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="설정"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPushSet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="알림 설정"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvRewordRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:text="보상 비율"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="-------------------"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCusCare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="고객센터"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvLogOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="로그아웃"
+                    android:onClick="@{(v) -> cont.onClick(v)}"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

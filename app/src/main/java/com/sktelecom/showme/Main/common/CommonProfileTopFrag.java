@@ -17,10 +17,11 @@ public class CommonProfileTopFrag extends PFragment implements View.OnClickListe
     private ICallback mICallback;
     private RelativeLayout.LayoutParams llIndicaterParam;
     private CommonProfileTopFragBinding binded;
+    private CommonProfileTopCont cont;
 
-    protected static CommonProfileTopFrag with(ICallback mICallback) {
+    protected static CommonProfileTopFrag with(CommonProfileTopCont cont, ICallback mICallback) {
         CommonProfileTopFrag frag = new CommonProfileTopFrag();
-        frag.setCallback(mICallback);
+        frag.setCallback(cont, mICallback);
         return frag;
     }
 
@@ -28,14 +29,15 @@ public class CommonProfileTopFrag extends PFragment implements View.OnClickListe
         return this;
     }
 
-    private void setCallback(ICallback mICallback) {
+    private void setCallback(CommonProfileTopCont cont, ICallback mICallback) {
         this.mICallback = mICallback;
+        this.cont = cont;
     }
 
     @Override
     public View abCreateView(@NonNull LayoutInflater inflater, ViewGroup container) {
         binded = DataBindingUtil.inflate(inflater, R.layout.common_profile_top_frag, container, false);
-
+        binded.setControl(cont);
         return binded.getRoot();
     }
 

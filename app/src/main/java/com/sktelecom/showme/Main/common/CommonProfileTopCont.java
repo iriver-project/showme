@@ -1,9 +1,11 @@
 package com.sktelecom.showme.Main.common;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.sktelecom.showme.base.view.PController;
 import com.sktelecom.showme.base.view.PFragment;
+import com.sktelecom.showme.setting.SettingActivity;
 
 
 public class CommonProfileTopCont extends PController {
@@ -18,7 +20,7 @@ public class CommonProfileTopCont extends PController {
     }
 
     protected PFragment asFragCreate() {
-        frag = CommonProfileTopFrag.with(cb);
+        frag = CommonProfileTopFrag.with(this, cb);
 
         return frag;
     }
@@ -31,15 +33,17 @@ public class CommonProfileTopCont extends PController {
     }
 
 
+    public void onClickSetting() {
+        Intent intent = new Intent(frag.pActivity, SettingActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        frag.pActivity.startActivityForResult(intent, 1);
+    }
+
     protected class CallbackEvent implements CommonProfileTopFrag.ICallback {
-
-
         @Override
         public void selected(int position) {
             mICallbackToAct.selected(position);
         }
-
-
     }
 
 
