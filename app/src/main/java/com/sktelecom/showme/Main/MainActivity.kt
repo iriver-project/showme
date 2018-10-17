@@ -26,10 +26,10 @@ class MainActivity : PActivity() {
     internal lateinit var prevBottomNavigation: MenuItem
 //    internal lateinit var mainBody: MainBodyCont
 
-    internal lateinit var homeVm: HomeBodyVM
     internal lateinit var tvVm: TvBodyVM
-    internal lateinit var feedVm: FeedBodyVM
-    internal lateinit var notiVm: NotificationBodyVM
+    internal lateinit var stageVm: HomeBodyVM
+    internal lateinit var uploadVm: FeedBodyVM
+    internal lateinit var newsVm: NotificationBodyVM
     internal lateinit var myVm: MyBodyVM
 
     private var singleMarginLeftSize = 0f
@@ -42,40 +42,35 @@ class MainActivity : PActivity() {
         val display = pCon.resources.displayMetrics
         singleMarginLeftSize = display.widthPixels.toFloat() / 5
 
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
-
-                when (item.getItemId()) {
-                    R.id.action_home -> {
-                        pFragReplace(binding.frameBody.id, homeVm.frag)
-
-                    }
-                    R.id.action_tv -> {
-                        pFragReplace(binding.frameBody.id, tvVm.frag)
-                    }
-                    R.id.action_feed -> {
-//                        pFragReplace(binding.frameBody.id, feedVm.frag)
-                        if (!checkReadExternalStoragePermission()) {
-                            return false
-                        }
-                        startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("video/*"), "Select A 비됴"), REQUEST_SELECT_VIDEO)
-                    }
-                    R.id.action_notice -> {
-                        pFragReplace(binding.frameBody.id, notiVm.frag)
-                    }
-                    R.id.action_my -> {
-                        pFragReplace(binding.frameBody.id, myVm.frag)
-                    }
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_tv -> {
+                    pFragReplace(binding.frameBody.id, tvVm.frag)
                 }
+                R.id.action_stage -> {
+                    pFragReplace(binding.frameBody.id, stageVm.frag)
+                }
+                R.id.action_upload -> {
+//                        pFragReplace(binding.frameBody.id, feedVm.frag)
+                    if (!checkReadExternalStoragePermission()) {
+                        return@OnNavigationItemSelectedListener false
+                    }
+                    startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("video/*"), "Select A 비됴"), REQUEST_SELECT_VIDEO)
+                }
+                R.id.action_news -> {
+                    pFragReplace(binding.frameBody.id, newsVm.frag)
+                }
+                R.id.action_my -> {
+                    pFragReplace(binding.frameBody.id, myVm.frag)
+                }
+            }
 //                var x:Int = singleMarginLeftSize.roundToInt()
 //                var y:Int = binding.bottomNavigation.y.roundToInt()
 //
 //                UAnimation.with().toggleInformationViewToBeVisibleOnly(applicationContext, x, y, binding.frameBody)
-                return true
-            }
+            true
         })
-        prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(1);
+        prevBottomNavigation = binding.bottomNavigation.menu.getItem(1)
         selectedPage(1)
 //        val layoutParams = binding.bottomNavigation.getLayoutParams() as CoordinatorLayout.LayoutParams
 //        layoutParams.behavior = BottomNavigationViewBehavior()
@@ -93,22 +88,22 @@ class MainActivity : PActivity() {
 //        })
 //        pFragAdd(binding.frameBody.id, mainBody.asFragCreate())
 
-        homeVm = ViewModelProviders.of(this).get(HomeBodyVM::class.java)
         tvVm = ViewModelProviders.of(this).get(TvBodyVM::class.java)
-        feedVm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
-        notiVm = ViewModelProviders.of(this).get(NotificationBodyVM::class.java)
+        stageVm = ViewModelProviders.of(this).get(HomeBodyVM::class.java)
+        uploadVm = ViewModelProviders.of(this).get(FeedBodyVM::class.java)
+        newsVm = ViewModelProviders.of(this).get(NotificationBodyVM::class.java)
         myVm = ViewModelProviders.of(this).get(MyBodyVM::class.java)
 
 
-        homeVm.asFragCreate()
         tvVm.asFragCreate()
-        feedVm.asFragCreate()
-        notiVm.asFragCreate()
+        stageVm.asFragCreate()
+        uploadVm.asFragCreate()
+        newsVm.asFragCreate()
         myVm.asFragCreate()
 
-        pFragAdd(binding.frameBody.id, tvVm.asFragResume())
+        pFragAdd(binding.frameBody.id, stageVm.asFragResume())
 
-        startReg()
+//        startReg()
 
 //        val intent = Intent(this, LevelActivity::class.java)
 ////        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -123,9 +118,9 @@ class MainActivity : PActivity() {
     }
 
     internal fun selectedPage(position: Int) {
-        prevBottomNavigation.setChecked(false);
-        prevBottomNavigation = binding.bottomNavigation.getMenu().getItem(position);
-        prevBottomNavigation.setChecked(true);
+        prevBottomNavigation.isChecked = false
+        prevBottomNavigation = binding.bottomNavigation.menu.getItem(position)
+        prevBottomNavigation.isChecked = true
     }
 
 

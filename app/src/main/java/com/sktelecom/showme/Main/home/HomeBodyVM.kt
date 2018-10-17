@@ -14,6 +14,7 @@ import com.sktelecom.showme.Main.common.CommonVoteActivity
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoArtist
 import com.sktelecom.showme.base.Model.VoContents
+import com.sktelecom.showme.base.Model.VoVideo
 import com.sktelecom.showme.base.Network.SmartNetWork
 import com.sktelecom.showme.base.util.Log
 import com.sktelecom.showme.base.view.PFragment
@@ -48,31 +49,44 @@ class HomeBodyVM : PViewModel() {
     internal fun callList() {
         val param = JSONObject()
         try {
-            param.put("stagNo", 10000000002)
-            param.put("prevStagNo", 10000000001)
+//            param.put("stagNo", 10000000002)
+//            param.put("prevStagNo", 10000000001)
+
+            param.put("vocaType", "GT")
+            param.put("id", "aaaa@aaaa")
+            param.put("startRow", "0")
+            param.put("numberOfRow", 50)
+            param.put("contentsType", "115")
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
-        val url = SmartNetWork.URL_SHOW_ME + "display/stage/artist/gets"
+        val url = SmartNetWork.URL + "getSellingContentsList_2" //_SHOW_ME + "display/stage/artist/gets"
         Log.i("get artist url :: ", url)
         SmartNetWork().getCommonDataPostParam(frag.pActivity, url, param, object : SmartNetWork.SmartNetWorkListener {
             override fun onResponse(Tag: Int, response: JSONObject) {
                 try {
                     Log.i("get artist result :: " + response.toString())
                     val msg = updateHandler.obtainMessage()
-                    val isReturn = response.optString("resCd")
-                    if (isReturn != null && isReturn == "0000") {
-                        val array = response.getJSONArray("data")
+
+                    val isReturn = response.optString("return")
+                    if (isReturn != null && isReturn == "true") {
+                        val array = response.getJSONArray("result")
+
+//                    val isReturn = response.optString("resCd")
+//                    if (isReturn != null && isReturn == "0000") {
+//                        val array = response.getJSONArray("data")
                         var row: JSONObject
-                        val artistStringList = ArrayList<PBean>()
+                        val artistList = ArrayList<PBean>()
 
                         for (i in 0..(array.length() - 1)) {
                             row = array.optJSONObject(i)
-                            artistStringList.add(VoArtist(row.optString("atstId"), row.optString("atstNm"), row.optString("atstThumbnail"), row.optInt("ststStagRank")))
+
+                            artistList.add(VoArtist(row.optString("CONTENTS_ID"), row.optString("CREATE_USER_NAME"),
+                                    row.optString("CREATE_USER_IMG_URL"), 1/*row.optInt("ststStagRank")*/))
                         }
                         msg.what = 0
-                        msg.obj = artistStringList
+                        msg.obj = artistList
                     } else {
                         msg.what = 0
                     }

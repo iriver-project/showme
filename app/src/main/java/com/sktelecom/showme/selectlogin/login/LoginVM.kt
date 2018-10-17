@@ -73,14 +73,20 @@ class LoginVM : PViewModel() {
     internal fun gets() {
         val param = JSONObject()
         try {
-            param.put("menuTypeCd", "MT0BASIC11")
-            param.put("limit", "5")
-            param.put("pg", "1")
+//            param.put("menuTypeCd", "MT0BASIC11")
+//            param.put("limit", "5")
+//            param.put("pg", "1")
+
+            param.put("vocaType", "GT")
+            param.put("id", "aaaa@aaaa")
+            param.put("startRow", "0")
+            param.put("numberOfRow", 50)
+            param.put("contentsType", "115")
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
-        val url = SmartNetWork.URL_SHOW_ME + "display/menu/gets"
+        val url = SmartNetWork.URL + "getSellingContentsList_2" //_SHOW_ME // + "display/menu/gets"
         Log.i("DUER", url)
         SmartNetWork().getCommonDataPostParamCookie(frag1.pActivity, url, param, object : SmartNetWork.SmartNetWorkListener {
             override fun onResponse(Tag: Int, response: JSONObject) {

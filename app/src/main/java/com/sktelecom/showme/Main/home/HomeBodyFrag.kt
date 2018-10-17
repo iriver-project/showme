@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sktelecom.showme.BR
@@ -16,7 +14,7 @@ import com.sktelecom.showme.R
 import com.sktelecom.showme.base.Model.PBean
 import com.sktelecom.showme.base.Model.VoArtist
 import com.sktelecom.showme.base.view.PFragment
-import com.sktelecom.showme.databinding.ArtistItemBinding
+import com.sktelecom.showme.databinding.HomeArtistItemBinding
 import com.sktelecom.showme.databinding.HomeBodyFragBinding
 import java.util.*
 
@@ -42,27 +40,16 @@ class HomeBodyFrag : PFragment() {
         binding.viewmodel = vm
         mGridAdapter = ArtistListAdapter()
 
-        binding.artistRv.layoutManager = GridLayoutManager(pCon, 3)
-        binding.artistRv.setHasFixedSize(false)
+        binding.rvArtist.layoutManager = GridLayoutManager(pCon, 3)
+        binding.rvArtist.setHasFixedSize(false)
 
         if (list.size <= 0) {
             binding.viewmodel!!.getList().observe(this, Observer {
                 list = it as ArrayList<PBean>
-                binding.artistRv.adapter = mGridAdapter
+                binding.rvArtist.adapter = mGridAdapter
             })
         } else {
-            binding.artistRv.adapter = mGridAdapter
-        }
-        binding.homeTitle.text = title
-
-        var name = arrayOf("stage1", "stage2", "stage3")
-        binding.stageSpn.adapter = ArrayAdapter<String>(pCon, android.R.layout.simple_spinner_item, name)
-        binding.stageSpn.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            }
+            binding.rvArtist.adapter = mGridAdapter
         }
 
         return binding.root
@@ -79,7 +66,7 @@ class HomeBodyFrag : PFragment() {
         }
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): RecyclerView.ViewHolder {
-            val binding = ArtistItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+            val binding = HomeArtistItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             return ArtistViewHolder(binding)
         }
 
@@ -87,10 +74,11 @@ class HomeBodyFrag : PFragment() {
             val viewHolder = holder as ArtistViewHolder
             val model = list[position] as VoArtist
             viewHolder.bind(model)
-            Glide.with(pCon).load(model.atstThumbnail).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.artistImg)
+            Glide.with(pCon).load(model.atstThumbnail).apply(RequestOptions().circleCrop()).into(viewHolder.ibinding.ivArtistCircle)
+            Glide.with(pCon).load("https://beataejzenheart.files.wordpress.com/2017/09/zrzut-ekranu-2017-09-27-o-15-45-39.png").into(viewHolder.ibinding.ivArtistBack)
         }
 
-        internal inner class ArtistViewHolder internal constructor(val ibinding: ArtistItemBinding) : RecyclerView.ViewHolder(ibinding.root) {
+        internal inner class ArtistViewHolder internal constructor(val ibinding: HomeArtistItemBinding) : RecyclerView.ViewHolder(ibinding.root) {
 
             internal fun bind(model: VoArtist) {
                 ibinding.setVariable(BR.item, model)

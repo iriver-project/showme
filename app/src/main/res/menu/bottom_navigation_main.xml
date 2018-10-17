@@ -3,33 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_home"
-        android:enabled="true"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="home"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_tv"
         android:enabled="true"
-        android:icon="@drawable/ic_supervisor_account_black_24dp"
+        android:icon="@drawable/btn_tv_black"
         android:title="tv"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_feed"
+        android:id="@+id/action_stage"
         android:enabled="true"
-        android:icon="@drawable/ic_supervisor_account_black_24dp"
-        android:title="feed"
+        android:icon="@drawable/btn_stage_black"
+        android:title="stage"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_notice"
+        android:id="@+id/action_upload"
         android:enabled="true"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="notice"
+        android:icon="@drawable/btn_upload_black"
+        android:title="upload"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_news"
+        android:enabled="true"
+        android:icon="@drawable/btn_news_black"
+        android:title="news"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_my"
         android:enabled="true"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/btn_my_black"
         android:title="my"
         app:showAsAction="ifRoom" />
 
